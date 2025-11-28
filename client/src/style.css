@@ -1,0 +1,286 @@
+/* Новая палитра */
+:root {
+    --mahogany: #32160e;
+    --sunburst: #efb489;
+    --cinnamon: #6b270d;
+    --cognac: #9a4d20;
+    --caramel: #c3844d;
+    --ember: #f27c16;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    background: #FFFFFF;
+}
+
+/* Шапка */
+.header {
+    position: fixed;
+    width: 100%;
+    height: 80px;
+    left: 0px;
+    top: 0px;
+    background: #FFFFFF;
+    border: 1px solid #F5F5F5;
+    z-index: 1000;
+}
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1440px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 60px;
+}
+
+.logo {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 30px;
+    color: var(--mahogany); /* Темно-коричневый */
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 20px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-links a {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    letter-spacing: 1px;
+    color: var(--mahogany); /* Темно-коричневый */
+    text-decoration: none;
+    transition: color 0.3s ease; 
+}
+
+.nav-links a:hover {
+    color: var(--ember); /* Оранжевый при наведении */
+}
+
+.nav-links .separator {
+    color: var(--mahogany); /* Темно-коричневый */
+    font-size: 20px;
+    pointer-events: none;
+}
+
+.btn-order {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 17px;
+    letter-spacing: 1px;
+    color: var(--mahogany); /* Темно-коричневый */
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 10px 0;
+    transition: color 0.3s ease;
+}
+
+.btn-order:hover {
+    color: var(--ember); /* Оранжевый при наведении */
+}
+
+body {
+    padding-top: 80px;
+}
+
+/* секция после шапки */
+.hero {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    background: url('/src/assets/hero-bg.png') center/cover;
+    opacity: 0.8;
+}
+
+.text-plate {
+    position: absolute;
+    width: 843px;
+    height: 307px;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
+    background: url('/src/assets/hero-plate.png') center/cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+.hero-text {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 25px;
+    line-height: 30px;
+    letter-spacing: 1px;
+    color: var(--mahogany); /* Темно-коричневый */
+    max-width: 495px;
+    margin-right: 130px;
+}
+
+/* Кнопка доставки */
+.btn-delivery {
+    position: absolute;
+    width: 317px;
+    height: 72px;
+    left: 590px;
+    top: 415px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn-border {
+    position: absolute;
+    width: 317px;
+    height: 72px;
+    border: 3px solid var(--caramel); /* Карамельная рамка */
+    top: 0;
+    left: 0;
+}
+
+.btn-bg {
+    position: absolute;
+    width: 317px;
+    height: 71px;
+    background: var(--mahogany); /* Темно-коричневый фон */
+    opacity: 0.9;
+    top: 1px;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+.btn-text {
+    position: absolute;
+    width: 253px;
+    height: 30px;
+    left: 33px;
+    top: 21px;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 30px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--sunburst); /* Светло-кремовый текст */
+}
+
+.btn-delivery:hover .btn-bg {
+    opacity: 1;
+    background: var(--cinnamon); /* Чуть светлее при наведении */
+}
+
+/* Информационные блоки */
+.info-blocks {
+    position: absolute;
+    width: 100%;
+    top: 533px;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+}
+
+.info-block {
+    position: relative;
+    width: 300px;
+    height: 250px;
+}
+
+.info-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: var(--cognac); /* Средне-коричневый */
+    border-radius: 55px;
+    transition: all 0.3s ease;
+}
+
+.info-block:hover .info-bg {
+    background: var(--cinnamon); /* Темнее при наведении */
+}
+
+.info-title {
+    position: absolute;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--sunburst); /* Светло-кремовый */
+    width: 100%;
+}
+
+.info-text {
+    position: absolute;
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: var(--sunburst); /* Светло-кремовый */
+    width: 100%;
+}
+
+/* Позиционирование текста */
+.block-hours .info-title {
+    top: 62px;
+    left: 0;
+}
+
+.block-hours .info-text {
+    top: 106px;
+    left: 0;
+    width: 182px;
+    margin-left: 59px;
+}
+
+.block-location .info-title {
+    top: 48px;
+    left: 0;
+}
+
+.block-location .info-text {
+    top: 86px;
+    left: 0;
+    width: 282px;
+    margin-left: 9px;
+}
+
+.block-booking .info-title {
+    top: 52px;
+    left: 0;
+}
+
+.block-booking .info-text {
+    top: 96px;
+    left: 0;
+    width: 202px;
+    margin-left: 49px;
+}
