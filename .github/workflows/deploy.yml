@@ -11,16 +11,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       
-      - name: Setup Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'
-          
-      - name: Install and Build
+      - name: Copy files to dist
         run: |
-          cd client
-          npm ci
-          npm run build
+          mkdir -p client/dist
+          cp -r client/index.html client/dist/
+          cp -r client/src client/dist/src 2>/dev/null || true
+          cp -r client/css client/dist/css 2>/dev/null || true
+          cp -r client/assets client/dist/assets 2>/dev/null || true
           
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
