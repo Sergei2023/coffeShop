@@ -7,118 +7,153 @@
     <link rel="stylesheet" href="/src/style.css">
 </head>
 <body>
-    <header class="header">
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a href="/" class="logo">Coffейня</a>
 
-        <nav class="nav">
-            <div class="logo">Coffейня</div>
-            
-            <ul class="nav-links">
-                <li><a href="#">Главная</a></li>
-                <li class="separator">•</li>
-                <li><a href="#">Меню</a></li>
-                <li class="separator">•</li>
-                <li><a href="#">О нас</a></li>
-                <li class="separator">•</li>
-                <li><a href="#">Контакты</a></li>
+        <nav class="main-nav" aria-label="Основная навигация">
+            <ul class="main-nav__list">
+                <li class="main-nav__item"><a class="main-nav__link" href="#">Главная</a></li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item"><a class="main-nav__link" href="#">Меню</a></li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item"><a class="main-nav__link" href="#">О нас</a></li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item"><a class="main-nav__link" href="#">Контакты</a></li>
             </ul>
-
-            <button class="btn-order">Сделть заказ</button>
         </nav>
 
-    </header>
-
-    <section class="hero">
-    <div class="text-plate">
-        <p class="hero-text">Приглашаем тебя в нашу уютную кофейню — место, где пахнет свежей выпечкой, ароматным кофе и хорошим настроением. Обнови паузу, встреться с друзьями или просто порадуй себя моментом тишины.</p>
+        <button class="button button--text site-header__order-button" type="button">
+            Сделать заказ
+        </button>
     </div>
+</header>
 
-    <button class="btn-delivery">
-        <div class="btn-border"></div>
-        <div class="btn-bg"></div>
-        <span class="btn-text">Заказать доставку</span> 
-    </button>
+<main>
+    <section class="hero" id="hero">
+        <div class="container hero__inner">
+            <div class="hero__plate">
+                <h1 class="hero__text">
+                    Приглашаем тебя в нашу уютную кофейню — место, где пахнет свежей выпечкой,
+                    ароматным кофе и хорошим настроением. Обнови паузу, встреться с друзьями
+                    или просто порадуй себя моментом тишины.
+                </h1>
+            </div>
 
-    <div class="info-blocks">
+            <button class="button button--primary hero__delivery-button" type="button">
+                Заказать доставку
+            </button>
 
-    <div class="info-block block-hours">
-        <div class="info-bg"></div>
-        <h3 class="info-title">Часы работы</h3>
-        <p class="info-text">пн-чт: 8:00 - 22:00<br>пт: 8:00 - 23:00<br>сб: 9:00 - 23:00<br>вс: 9:00 - 23:00</p>
-    </div>
+            <div class="hero-info">
+                <article class="hero-info__card">
+                    <h3 class="hero-info__title">Часы работы</h3>
+                    <p class="hero-info__text">
+                        пн–чт: 8:00 – 22:00<br>
+                        пт: 8:00 – 23:00<br>
+                        сб: 9:00 – 23:00<br>
+                        вс: 9:00 – 23:00
+                    </p>
+                </article>
 
-    <div class="info-block block-location">
-        <div class="info-bg"></div>
-        <h3 class="info-title">Как добраться</h3>
-        <p class="info-text">Ул. Руднева, 10<br>метро Озерки<br><br>Пр. Просвещения, 15<br>метро Проспект Просвещения</p>
-    </div>
+                <article class="hero-info__card">
+                    <h3 class="hero-info__title">Как добраться</h3>
+                    <p class="hero-info__text">
+                        Ул. Руднева, 10<br>
+                        метро Озерки<br><br>
+                        Пр. Просвещения, 15<br>
+                        метро Проспект Просвещения
+                    </p>
+                </article>
 
-    <div class="info-block block-booking">
-        <div class="info-bg"></div>
-        <h3 class="info-title">Бронирование стола</h3>
-        <p class="info-text">Ул. Руднева, 10<br>+7 (123) 456 78 90<br><br>Пр. Просвещения, 15<br>+7 (098) 765 43 21</p>
-    </div>
-
-</div>
-
-    </section>
-
-    <section class="about-section">
-
-    <div class="about-content">
-        <p class="about-text">Coffeйня — это место, где рождается ваш идеальный день. Мы начинаем его с чашки ароматного кофе спешалти и домашнего десерта, а продолжаем — в атмосфере уюта и спокойствия. Наша команда — это фанаты своего дела, которые с любовью отбирают зерно и готовят для вас каждый напиток. В coffeйне вас ждет удобный рабочий стол, быстрый Wi-Fi и вкус, который захочется повторить. Coffeйня: Ваш ежедневный ритуал с кофе.</p>
-    </div>
-
-    </section>
-
-    <section class="features-section">
-
-    <div class="features-content">
-        <div class="features-list">
-            <div class="feature-item">01. Кофе класса specialty</div>
-            <div class="feature-item">02. Собственная кондитерская</div>
-            <div class="feature-item">03. Завтраки весь день</div>
-            <div class="feature-item">04. Авторские напитки</div>
-            <div class="feature-item">05. Лучшие ингредиенты</div>
+                <article class="hero-info__card">
+                    <h3 class="hero-info__title">Бронирование стола</h3>
+                    <p class="hero-info__text">
+                        Ул. Руднева, 10<br>
+                        +7 (123) 456‑78‑90<br><br>
+                        Пр. Просвещения, 15<br>
+                        +7 (098) 765‑43‑21
+                    </p>
+                </article>
+            </div>
         </div>
-        <div class="feature-image"></div>
-    </div>
+    </section>
 
-</section>
+    <section class="about" id="about">
+        <div class="container about__inner">
+            <p class="about__text">
+                Coffeйня — это место, где рождается ваш идеальный день. Мы начинаем его с чашки
+                ароматного кофе спешалти и домашнего десерта, а продолжаем — в атмосфере уюта и
+                спокойствия. Наша команда — это фанаты своего дела, которые с любовью отбирают
+                зерно и готовят для вас каждый напиток. В coffeйне вас ждет удобный рабочий стол,
+                быстрый Wi‑Fi и вкус, который захочется повторить. Coffeйня: ваш ежедневный
+                ритуал с кофе.
+            </p>
+        </div>
+    </section>
 
-<footer class="footer">
-    
-    <div class="footer-content">
-        <div class="footer-section">
-            <div class="section-title">Контакты</div>
-            <div class="contact-info">
+    <section class="features" id="features">
+        <div class="container features__inner">
+            <ul class="features__list">
+                <li class="features__item">01. Кофе класса specialty</li>
+                <li class="features__item">02. Собственная кондитерская</li>
+                <li class="features__item">03. Завтраки весь день</li>
+                <li class="features__item">04. Авторские напитки</li>
+                <li class="features__item">05. Лучшие ингредиенты</li>
+            </ul>
+
+            <div class="features__image" aria-hidden="true"></div>
+        </div>
+    </section>
+</main>
+
+<footer class="site-footer" id="contacts">
+    <div class="container site-footer__inner">
+        <section class="site-footer__column">
+            <h2 class="site-footer__title">Контакты</h2>
+            <div class="site-footer__block">
                 <p>Телефон поддержки</p>
-                <a href="tel:+71234567890" class="footer-link">+7 (123) 456 78 90</a>
+                <a href="tel:+71234567890" class="site-footer__link">
+                    +7 (123) 456‑78‑90
+                </a>
                 <p>Контактная почта</p>
-                <a href="mailto:pochta123@gmail.com" class="footer-link">pochta123@gmail.com</a>
+                <a href="mailto:pochta123@gmail.com" class="site-footer__link">
+                    pochta123@gmail.com
+                </a>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-section">
-            <div class="section-title">Документы</div>
-            <div class="doc-links">
-                <a href="/privacy.html" class="footer-link">Политика конфиденциальности</a>
-                <a href="/payment.html" class="footer-link">Условия оплаты и возврата</a>
-                <a href="/delivery.html" class="footer-link">Условия доставки</a>
+        <section class="site-footer__column">
+            <h2 class="site-footer__title">Документы</h2>
+            <div class="site-footer__block">
+                <a href="/privacy.html" class="site-footer__link">Политика конфиденциальности</a>
+                <a href="/payment.html" class="site-footer__link">Условия оплаты и возврата</a>
+                <a href="/delivery.html" class="site-footer__link">Условия доставки</a>
             </div>
-        </div>
+        </section>
 
-        <div class="footer-section">
-            <div class="section-title">Социальные сети</div>
-            <div class="social-links">
-                <p>Instagram: <a href="https://instagram.com/instagram123" target="_blank" class="footer-link">instagram123</a></p>
-                <p>Facebook: <a href="https://facebook.com/facebook123" target="_blank" class="footer-link">facebook123</a></p>
-                <p>VK: <a href="https://vk.com/vk123" target="_blank" class="footer-link">vk123</a></p>
+        <section class="site-footer__column">
+            <h2 class="site-footer__title">Социальные сети</h2>
+            <div class="site-footer__block">
+                <p>Instagram:
+                    <a href="https://instagram.com/instagram123" target="_blank" class="site-footer__link">
+                        instagram123
+                    </a>
+                </p>
+                <p>Facebook:
+                    <a href="https://facebook.com/facebook123" target="_blank" class="site-footer__link">
+                        facebook123
+                    </a>
+                </p>
+                <p>VK:
+                    <a href="https://vk.com/vk123" target="_blank" class="site-footer__link">
+                        vk123
+                    </a>
+                </p>
             </div>
-        </div>
+        </section>
     </div>
-
 </footer>
 
-    <script type="module" src="/src/main.js"></script>
+<script type="module" src="/src/main.js"></script>
 </body>
 </html>

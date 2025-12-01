@@ -7,330 +7,259 @@
     --ember: #f27c16;
 }
 
-* {
+/* Сброс и базовые стили */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
 }
 
 body {
     font-family: 'Inter', Arial, sans-serif;
-    background: #FFFFFF;
+    background-color: #ffffff;
+    color: var(--mahogany);
+    padding-top: 80px; /* под фиксированную шапку */
 }
 
-/* Шапка */
-.header {
-    position: fixed;
-    width: 100%;
-    height: 80px;
-    left: 0px;
-    top: 0px;
-    background: #FFFFFF;
-    border: 1px solid #F5F5F5;
-    z-index: 1000;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
-.nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+ul {
+    list-style: none;
+}
+
+/* Утилиты */
+
+.container {
     max-width: 1440px;
-    height: 100%;
     margin: 0 auto;
     padding: 0 60px;
 }
 
+/* Кнопки */
+
+.button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-family: inherit;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.button--text {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--mahogany);
+    padding: 10px 0;
+}
+
+.button--text:hover {
+    color: var(--ember);
+}
+
+.button--primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px 48px;
+    border-radius: 8px;
+    border: 3px solid var(--caramel);
+    background-color: rgba(50, 22, 14, 0.9);
+    color: var(--sunburst);
+    font-weight: 600;
+    font-size: 25px;
+    line-height: 1.2;
+}
+
+.button--primary:hover {
+    background-color: var(--cinnamon);
+}
+
+/* Шапка */
+
+.site-header {
+    position: fixed;
+    inset: 0 0 auto 0;
+    height: 80px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #f5f5f5;
+    z-index: 1000;
+}
+
+.site-header__inner {
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+}
+
 .logo {
-    font-family: 'Inter';
-    font-style: normal;
     font-weight: 300;
     font-size: 25px;
     line-height: 30px;
     color: var(--mahogany);
 }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+/* Навигация */
+
+.main-nav {
+    justify-self: center;
 }
 
-.nav-links a {
-    font-family: 'Inter';
-    font-style: normal;
+.main-nav__list {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.main-nav__link {
     font-weight: 300;
     font-size: 14px;
     line-height: 17px;
     letter-spacing: 1px;
     color: var(--mahogany);
-    text-decoration: none;
-    transition: color 0.3s ease; 
-}
-
-.nav-links a:hover {
-    color: var(--ember);
-}
-
-.nav-links .separator {
-    color: var(--mahogany);
-    font-size: 20px;
-    pointer-events: none;
-}
-
-.btn-order {
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 20px;
-    line-height: 17px;
-    letter-spacing: 1px;
-    color: var(--mahogany);
-    background: transparent;
-    border: none;
-    cursor: pointer;
-    padding: 10px 0;
     transition: color 0.3s ease;
 }
 
-.btn-order:hover {
+.main-nav__link:hover {
     color: var(--ember);
 }
 
-body {
-    padding-top: 80px;
+.main-nav__separator {
+    font-size: 20px;
+    color: var(--mahogany);
+    pointer-events: none;
 }
 
-/* секция после шапки */
+/* Hero */
+
 .hero {
-    width: 100%;
-    height: 800px;
-    position: relative;
-    background: url('/src/assets/hero-bg.png') center/cover;
+    background: url('/src/assets/hero-bg.png') center/cover no-repeat;
 }
 
-.text-plate {
-    position: absolute;
-    width: 843px;
-    height: 307px;
-    left: 50%;
-    top: 50px;
-    transform: translateX(-50%);
-    background: url('/src/assets/hero-plate.png') center/cover;
+.hero__inner {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    padding: 40px;
+    padding: 120px 0 80px;
 }
 
-.hero-text {
-    font-family: 'Inter';
-    font-style: normal;
+.hero__plate {
+    max-width: 843px;
+    width: 100%;
+    min-height: 307px;
+    padding: 40px;
+    background: url('/src/assets/hero-plate.png') center/cover no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.hero__text {
+    max-width: 495px;
     font-weight: 300;
     font-size: 25px;
     line-height: 30px;
     letter-spacing: 1px;
     color: var(--mahogany);
-    max-width: 495px;
-    margin-right: 130px;
+    text-align: left;
+    margin-right: 250px;
 }
 
-.btn-delivery {
-    position: absolute;
-    width: 317px;
-    height: 72px;
-    left: 590px;
-    top: 415px;
-    border: none;
-    background: transparent;
-    cursor: pointer;
+.hero__delivery-button {
+    margin-top: 40px;
 }
 
-.btn-border {
-    position: absolute;
-    width: 317px;
-    height: 72px;
-    border: 3px solid var(--caramel);
-    top: 0;
-    left: 0;
-}
-
-.btn-bg {
-    position: absolute;
-    width: 317px;
-    height: 71px;
-    background: var(--mahogany);
-    opacity: 0.9;
-    top: 1px;
-    left: 0;
-    transition: all 0.3s ease;
-}
-
-.btn-text {
-    position: absolute;
-    width: 253px;
-    height: 30px;
-    left: 33px;
-    top: 21px;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 600;
-    font-size: 25px;
-    line-height: 30px;
-    text-align: center;
-    letter-spacing: 1px;
-    color: var(--sunburst);
-}
-
-.btn-delivery:hover .btn-bg {
-    opacity: 1;
-    background: var(--cinnamon);
-}
-
-.info-blocks {
-    position: absolute;
-    width: 100%;
-    top: 533px;
+.hero-info {
+    margin-top: 60px;
     display: flex;
     justify-content: center;
     gap: 150px;
+    flex-wrap: wrap;
 }
 
-.info-block {
-    position: relative;
+.hero-info__card {
     width: 300px;
-    height: 250px;
-}
-
-.info-bg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: var(--cognac);
+    min-height: 250px;
     border-radius: 55px;
-}
-
-.info-title {
-    position: absolute;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
-    text-align: center;
-    letter-spacing: 1px;
+    background-color: var(--cognac);
     color: var(--sunburst);
-    width: 100%;
-}
-
-.info-text {
-    position: absolute;
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 18px;
-    line-height: 22px;
     text-align: center;
-    letter-spacing: 1px;
-    color: var(--sunburst);
-    width: 100%;
-}
-
-.block-hours .info-title {
-    top: 62px;
-    left: 0;
-}
-
-.block-hours .info-text {
-    top: 106px;
-    left: 0;
-    width: 182px;
-    margin-left: 59px;
-}
-
-.block-location .info-title {
-    top: 48px;
-    left: 0;
-}
-
-.block-location .info-text {
-    top: 86px;
-    left: 0;
-    width: 282px;
-    margin-left: 9px;
-}
-
-.block-booking .info-title {
-    top: 52px;
-    left: 0;
-}
-
-.block-booking .info-text {
-    top: 96px;
-    left: 0;
-    width: 202px;
-    margin-left: 49px;
-}
-
-/* секция с описанием */
-.about-section {
-    width: 100%;
-    height: 350px;
-    background: var(--cognac);
+    padding: 48px 32px;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 24px;
 }
 
-.about-content {
+.hero-info__title {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 1px;
+}
+
+.hero-info__text {
+    font-weight: 300;
+    font-size: 18px;
+    line-height: 22px;
+    letter-spacing: 1px;
+}
+
+/* О нас */
+
+.about {
+    background-color: var(--cognac);
+    padding: 80px 0;
+}
+
+.about__inner {
     max-width: 1200px;
-    width: 100%;
+    margin: 0 auto;
     text-align: center;
 }
 
-.about-text {
-    font-family: 'Inria Serif';
-    font-style: normal;
+.about__text {
+    font-family: 'Inria Serif', serif;
     font-weight: 300;
     font-size: 28px;
     line-height: 34px;
-    text-align: center;
     letter-spacing: 1px;
     color: var(--sunburst);
 }
 
-/* секция после описания */
-.features-section {
-    position: relative;
-    width: 100%;
-    height: 400px;
-    background: var(--sunburst);
-    display: flex;
-    align-items: center;
-    padding: 0 60px;
+/* Особенности */
+
+.features {
+    background-color: var(--sunburst);
+    padding: 80px 0;
 }
 
-.features-content {
+.features__inner {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 1440px;
-    margin: 0 auto;
+    gap: 80px;
 }
 
-.features-list {
-    width: 431px;
-    margin-left: 100px;
+.features__list {
+    max-width: 431px;
 }
 
-.feature-item {
-    font-family: 'Inria Serif';
-    font-style: normal;
+.features__item {
+    font-family: 'Inria Serif', serif;
     font-weight: 300;
     font-size: 28px;
     line-height: 34px;
@@ -339,126 +268,89 @@ body {
     margin-bottom: 20px;
 }
 
-.feature-image {
-    width: 375px;
+.features__image {
+    flex: 0 0 375px;
     height: 375px;
-    background: url('/src/assets/logo.png') center/cover;
+    background: url('/src/assets/logo.png') center/cover no-repeat;
     opacity: 0.4;
     border-radius: 62px;
-    margin-right: 100px;
 }
 
 /* Футер */
-.footer {
-    width: 100%;
-    height: 150px;
-    background: #FFFFFF;
-    position: relative;
-    border-top: 1px solid #eee;
+
+.site-footer {
+    border-top: 1px solid #eeeeee;
+    background-color: #ffffff;
 }
 
-.footer-content {
+.site-footer__inner {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
-    max-width: 1440px;
-    margin: 0 auto;
+    gap: 40px;
     padding: 40px 60px;
-    position: relative;
 }
 
-.footer-section {
-    position: relative;
-    width: 30%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.site-footer__column {
+    flex: 1 1 0;
+    text-align: center;
 }
 
-.section-title {
-    font-family: 'Inria Serif';
-    font-style: normal;
+.site-footer__title {
+    font-family: 'Inria Serif', serif;
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
     letter-spacing: 1px;
-    color: #000000;
-    margin-bottom: 10px;
     text-transform: uppercase;
+    margin-bottom: 10px;
+    color: #000000;
 }
 
-.footer-link {
-    font-family: 'Inria Serif';
-    font-style: normal;
+.site-footer__block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.site-footer__block p {
+    font-family: 'Inria Serif', serif;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 16px;
+    letter-spacing: 1px;
+    color: #000000;
+    margin: 0;
+}
+
+.site-footer__link {
+    position: relative;
+    display: inline-block;
+    font-family: 'Inria Serif', serif;
     font-weight: 300;
     font-size: 15px;
     line-height: 18px;
     letter-spacing: 1px;
     color: #000000;
-    text-decoration: none;
-    position: relative;
-    transition: all 0.3s ease;
-    display: inline-block;
     margin: 4px 0;
+    transition: color 0.3s ease;
 }
 
-.footer-link:hover {
-    color: #0000FF;
-}
-
-.footer-link::after {
+.site-footer__link::after {
     content: '';
     position: absolute;
+    left: 0;
+    bottom: -2px;
     width: 0;
     height: 1px;
-    bottom: -2px;
-    left: 0;
-    background-color: #0000FF;
+    background-color: #0000ff;
     transition: width 0.3s ease;
 }
 
-.footer-link:hover::after {
+.site-footer__link:hover {
+    color: #0000ff;
+}
+
+.site-footer__link:hover::after {
     width: 100%;
-}
-
-.contact-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.contact-info p {
-    margin: 0;
-    font-family: 'Inria Serif';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 16px;
-    letter-spacing: 1px;
-    color: #000000;
-}
-
-.doc-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.social-links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.social-links p {
-    margin: 0;
-    font-family: 'Inria Serif';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 16px;
-    letter-spacing: 1px;
-    color: #000000;
 }
