@@ -16,7 +16,7 @@
                 <li class="main-nav__separator">•</li>
                 <li class="main-nav__item"><a class="main-nav__link" href="./menu.html">Меню</a></li>
                 <li class="main-nav__separator">•</li>
-                <li class="main-nav__item"><a class="main-nav__link" href="">О нас</a></li>
+                <li class="main-nav__item"><a class="main-nav__link" href="./about.html">О нас</a></li>
                 <li class="main-nav__separator">•</li>
                 <li class="main-nav__item"><a class="main-nav__link" href="">Контакты</a></li>
             </ul>
@@ -29,7 +29,27 @@
 </header>
 
 <main>
+    <section class="menu-hero">
+        <div class="container">
+            <h1 class="menu-title">Наше меню</h1>
+            <p class="menu-subtitle">Выберите свой любимый кофе или десерт</p>
+        </div>
+    </section>
 
+    <section class="menu-content">
+        <div class="container">
+            <div class="menu-filters">
+                <button class="filter-btn" data-filter="all">Все</button>
+                <button class="filter-btn" data-filter="coffee">Кофе</button>
+                <button class="filter-btn" data-filter="tea">Чай</button>
+                <button class="filter-btn" data-filter="dessert">Десерты</button>
+                <button class="filter-btn" data-filter="bakery">Выпечка</button>
+            </div>
+            <div class="menu-grid" id="menu-container">
+
+            </div>
+        </div>
+    </section>
 </main>
 
 <footer class="site-footer" id="contacts">
@@ -81,6 +101,6 @@
 </footer>
 
 <div id="app"></div>
-<script type="module" src="/src/main.js"></script>
+<script type="module" src="/src/menu.js"></script>
 </body>
 </html>

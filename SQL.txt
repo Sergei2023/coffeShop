@@ -1,0 +1,30 @@
+CREATE TABLE categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100) NOT NULL UNIQUE,
+    slug VARCHAR(100) UNIQUE NOT NULL
+);
+
+INSERT INTO categories (name, slug) VALUES
+('Кофе', 'coffee'),
+('Чай', 'tea'),
+('Десерты', 'dessert'),
+('Выпечка', 'bakery');
+
+CREATE TABLE menu_items (
+    id SERIAL PRIMARY KEY,
+    category_id INTEGER REFERENCES categories(id),
+    name VARCHAR(200) NOT NULL,
+    description TEXT,
+    price DECIMAL(10, 2) NOT NULL,
+    image_url TEXT,
+);
+
+INSERT INTO menu_items (category_id, name, description, price, image_url) VALUES
+(1, 'Эспрессо', 'Классический крепкий кофе', 180.00, '/images/expresso1.png'),
+(1, 'Капучино', 'Эспрессо с молочной пенкой', 220.00, '/images/capuchino1.png'),
+(1, 'Латте', 'Нежный кофе с большим количеством молока', 240.00, '/images/latte1.png'),
+(2, 'Чёрный чай', 'Ароматный цейлонский чай', 150.00, '/images/bltea1.png'),
+(2, 'Зеленый чай', 'Ароматный китайский чай', 150.00, '/images/grntea1.png'),
+(3, 'Тирамису', 'Итальянский десерт с кофе и маскарпоне', 320.00, '/images/tiramisu1.png'),
+(4, 'Круассан с шоколадом', 'Мягкий круасан с шоколадным кремом', 190.00, '/images/kruassan1.png'),
+(4, 'Круассан с ветчиной и сыром', 'Мягкий круассан с ветчиной, сыром и соусом', 200.00, '/images/kruassan2.png');

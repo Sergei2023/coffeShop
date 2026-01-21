@@ -1,0 +1,479 @@
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Hero с первым изображением */
+
+.hero-image-section {
+  padding: 40px 0;
+}
+
+.hero-image__wrapper {
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 1024px) {
+  .hero-image__wrapper {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-image-section {
+    padding: 32px 0;
+  }
+
+  .hero-image__wrapper {
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-image-section {
+    padding: 24px 0;
+  }
+}
+
+/* Блок "О компании" */
+
+.about-text-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.about-text__content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.about-text__title {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 40px;
+  color: #000;
+  letter-spacing: -0.5px;
+}
+
+.about-text__paragraphs {
+  font-size: 18px;
+  line-height: 1.7;
+  color: #333;
+}
+
+.about-text__paragraphs p {
+  margin-bottom: 24px;
+}
+
+.about-text__paragraphs p:last-child {
+  margin-bottom: 0;
+}
+
+.about-text__paragraphs .lead-paragraph {
+  font-size: 25px;
+  line-height: 1.6;
+  color: #000;
+  font-weight: 500;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+@media (max-width: 1024px) {
+  .about-text-section {
+    padding: 60px 0;
+  }
+
+  .about-text__content {
+    max-width: 800px;
+  }
+
+  .about-text__title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-text-section {
+    padding: 50px 0;
+  }
+
+  .about-text__title {
+    font-size: 36px;
+    margin-bottom: 30px;
+  }
+
+  .about-text__paragraphs {
+    font-size: 17px;
+    line-height: 1.65;
+  }
+
+  .about-text__paragraphs .lead-paragraph {
+    font-size: 18px;
+    margin-bottom: 28px;
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-text-section {
+    padding: 40px 0;
+  }
+
+  .about-text__title {
+    font-size: 32px;
+    margin-bottom: 25px;
+  }
+
+  .about-text__paragraphs {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .about-text__paragraphs .lead-paragraph {
+    font-size: 17px;
+    padding-left: 18px;
+  }
+}
+
+/* Картинка внутри текстового блока */
+
+.text-image-block {
+  margin: 50px 0;
+  width: 100%;
+}
+
+.text-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+@media (max-width: 768px) {
+  .text-image-block {
+    margin: 40px 0;
+  }
+
+  .text-image {
+    border-radius: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .text-image-block {
+    margin: 30px 0;
+  }
+
+  .text-image {
+    border-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+}
+
+/* Статистика */
+
+.stats-section {
+  padding: 100px 0;
+  background-color: #000;
+  color: #fff;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.stat-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  right: -20px;
+  top: 20%;
+  height: 60%;
+  width: 1px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-number {
+  font-size: 64px;
+  font-weight: 700;
+  line-height: 1;
+  margin-bottom: 15px;
+  color: #fff;
+  letter-spacing: -1px;
+}
+
+.stat-label {
+  font-size: 16px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 180px;
+}
+
+@media (max-width: 1024px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px 30px;
+  }
+
+  .stat-item:nth-child(3)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-section {
+    padding: 70px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 20px;
+  }
+
+  .stat-number {
+    font-size: 56px;
+  }
+
+  .stat-item:nth-child(2)::after,
+  .stat-item:nth-child(4)::after {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-section {
+    padding: 60px 0;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .stat-number {
+    font-size: 48px;
+  }
+
+  .stat-label {
+    font-size: 15px;
+  }
+}
+
+/* Философия / цитата */
+
+.philosophy-section {
+  padding: 70px 0;
+  background-color: #fff;
+}
+
+.philosophy-header {
+  max-width: 700px;
+  margin: 0 auto 50px;
+  text-align: center;
+}
+
+.philosophy-title {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: #000;
+  letter-spacing: -0.5px;
+}
+
+.philosophy-description {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #333;
+  margin: 0;
+}
+
+.philosophy-centered-container {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  min-height: 300px;
+}
+
+.centered-photo-wrapper {
+  flex: 0 0 auto;
+  width: 192px;
+  display: flex;
+  align-items: center;
+}
+
+.centered-photo {
+  width: 192px;
+  height: 258px;
+  display: block;
+}
+
+.centered-quote-wrapper {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.centered-quote-content {
+  padding: 20px 0;
+}
+
+.centered-quote {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #333;
+  font-style: italic;
+  margin: 0 0 15px 0;
+}
+
+.centered-name {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  font-style: normal;
+  font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+  .philosophy-section {
+    padding: 60px 0;
+  }
+
+  .philosophy-header {
+    margin-bottom: 40px;
+    max-width: 600px;
+  }
+
+  .philosophy-centered-container {
+    max-width: 700px;
+    gap: 35px;
+    min-height: 280px;
+  }
+
+  .philosophy-title {
+    font-size: 32px;
+  }
+
+  .philosophy-description {
+    font-size: 16px;
+  }
+
+  .centered-quote {
+    font-size: 17px;
+  }
+}
+
+@media (max-width: 768px) {
+  .philosophy-section {
+    padding: 50px 0;
+  }
+
+  .philosophy-header {
+    margin-bottom: 35px;
+    text-align: left;
+  }
+
+  .philosophy-centered-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    min-height: auto;
+    max-width: 100%;
+  }
+
+  .centered-photo-wrapper {
+    width: 192px;
+    justify-content: center;
+  }
+
+  .centered-quote-wrapper {
+    width: 100%;
+    align-items: flex-start;
+  }
+
+  .centered-quote-content {
+    width: 100%;
+    padding: 0;
+  }
+
+  .philosophy-title {
+    font-size: 28px;
+  }
+
+  .philosophy-description {
+    font-size: 15px;
+  }
+
+  .centered-quote {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  .centered-name {
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .philosophy-section {
+    padding: 40px 0;
+  }
+
+  .philosophy-title {
+    font-size: 26px;
+  }
+
+  .centered-photo-wrapper {
+    width: 160px;
+  }
+
+  .centered-photo {
+    width: 160px;
+    height: auto;
+    max-height: 215px;
+  }
+}
