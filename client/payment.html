@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Условия оплаты и возврата | Coffейня</title>
+  <link rel="stylesheet" href="./src/styles/payment.css">
+  <link rel="stylesheet" href="./src/styles/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inria+Serif:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a href="/coffeShop/" class="logo">Coffейня</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+            <ul class="main-nav__list">
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/">Главная</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/menu.html">Меню</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/about.html">О нас</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/contact.html">Контакты</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/cart.html" id="cartNavLink">
+                         Корзина <span id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth-buttons" id="authButtons"></div>
+    </div>
+</header>
+
+<main class="payment-page">
+  <div class="container payment-container">
+    <div class="payment-header">
+      <h1 class="payment-title">Условия оплаты и возврата</h1>
+      <p class="payment-date">Дата последнего обновления: 15 апреля 2024 г.</p>
+    </div>
+    
+    <div class="payment-content">
+      <div class="payment-intro">
+        <p class="intro-text">
+          В кофейне <span class="highlight">«Coffейня»</span> мы стремимся сделать процесс оплаты максимально удобным, 
+          а условия возврата — прозрачными и справедливыми. Ниже представлены подробные правила оплаты и возврата средств.
+        </p>
+      </div>
+      
+      <section class="payment-section">
+        <h2 class="section-title">1. Способы оплаты</h2>
+        
+        <div class="payment-methods">
+          <div class="method-card">
+            <div class="method-icon">💳</div>
+            <h3 class="method-title">Банковской картой онлайн</h3>
+            <p class="method-desc">Visa, MasterCard, МИР через защищенный платежный шлюз</p>
+          </div>
+          
+          <div class="method-card">
+            <div class="method-icon">🏪</div>
+            <h3 class="method-title">В кофейне</h3>
+            <p class="method-desc">Наличными или картой при получении заказа</p>
+          </div>
+          
+          <div class="method-card">
+            <div class="method-icon">📱</div>
+            <h3 class="method-title">Электронные кошельки</h3>
+            <p class="method-desc">ЮMoney, СБП (Система быстрых платежей)</p>
+          </div>
+        </div>
+      </section>
+      
+      <section class="payment-section">
+        <h2 class="section-title">2. Безопасность платежей</h2>
+        <p class="payment-text">
+          Все онлайн-платежи защищены с помощью технологии SSL-шифрования. Мы не храним данные вашей 
+          банковской карты на своих серверах. Обработка платежей осуществляется через 
+          <span class="highlight">ПАО Сбербанк</span> — одного из самых надежных платежных провайдеров.
+        </p>
+        <div class="security-badge">
+          <span class="badge">🔒 SSL защита</span>
+          <span class="badge">📊 PCI DSS соответствие</span>
+          <span class="badge">🛡️ 3D Secure</span>
+        </div>
+      </section>
+      
+      <section class="payment-section">
+        <h2 class="section-title">3. Возврат товаров</h2>
+        <p class="payment-text">
+          В соответствии с законодательством РФ, продовольственные товары надлежащего качества 
+          возврату и обмену не подлежат. Однако мы идем навстречу нашим клиентам и предусмотрели 
+          следующие случаи:
+        </p>
+        
+        <div class="refund-cases">
+          <div class="case-card case-card--positive">
+            <h4 class="case-title">✅ Возврат возможен</h4>
+            <ul class="case-list">
+              <li>Товар с истекшим сроком годности</li>
+              <li>Несоответствие заказанного и полученного товара</li>
+              <li>Обнаружение посторонних предметов в продукции</li>
+              <li>Порча товара при доставке</li>
+            </ul>
+          </div>
+          
+          <div class="case-card case-card--negative">
+            <h4 class="case-title">❌ Возврат невозможен</h4>
+            <ul class="case-list">
+              <li>Изменение мнения о вкусе продукта</li>
+              <li>Несоответствие ожиданий внешнему виду</li>
+              <li>Испорченный товар по вине покупателя</li>
+              <li>Частично использованный товар</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+      
+      <section class="payment-section">
+        <h2 class="section-title">4. Процедура возврата</h2>
+        <div class="refund-steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3 class="step-title">Обращение</h3>
+              <p class="step-desc">Свяжитесь с нами в течение 24 часов с момента получения заказа</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3 class="step-title">Проверка</h3>
+              <p class="step-desc">Мы проверим заявку и при необходимости запросим фото/видео доказательства</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3 class="step-title">Решение</h3>
+              <p class="step-desc">Принимаем решение о возврате в течение 3 рабочих дней</p>
+            </div>
+          </div>
+          
+          <div class="step">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3 class="step-title">Возврат средств</h3>
+              <p class="step-desc">Возвращаем деньги тем же способом, которым была произведена оплата</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="refund-note">
+          <p class="payment-text">
+            <strong>Важно:</strong> При оплате наличными возврат осуществляется только в кофейне при предъявлении 
+            чека. Срок возврата средств на карту — до 10 банковских дней.
+          </p>
+        </div>
+      </section>
+      
+      <section class="payment-section">
+        <h2 class="section-title">5. Отмена заказа</h2>
+        <p class="payment-text">
+          Вы можете отменить заказ до момента его приготовления. Время на отмену зависит от типа заказа:
+        </p>
+        
+        <table class="cancel-table">
+          <thead>
+            <tr>
+              <th>Тип заказа</th>
+              <th>Время на отмену</th>
+              <th>Комиссия</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Навынос</td>
+              <td>До начала приготовления</td>
+              <td>Без комиссии</td>
+            </tr>
+            <tr>
+              <td>Доставка</td>
+              <td>За 30 минут до доставки</td>
+              <td>Без комиссии</td>
+            </tr>
+            <tr>
+              <td>Предзаказ (стол)</td>
+              <td>За 2 часа до времени</td>
+              <td>Без комиссии</td>
+            </tr>
+            <tr>
+              <td>Кейтеринг</td>
+              <td>За 48 часов</td>
+              <td>30% от суммы</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      
+      <div class="contact-info">
+        <h3 class="contact-title">По вопросам оплаты и возвратов</h3>
+        <div class="contact-details">
+          <div class="contact-item">
+            <span class="contact-label">Телефон:</span>
+            <a href="tel:+71234567890" class="contact-value">+7 (123) 456-78-90</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Email:</span>
+            <a href="mailto:refunds@coffeenya.ru" class="contact-value">refunds@coffeenya.ru</a>
+          </div>
+          <div class="contact-item">
+            <span class="contact-label">Часы работы отдела:</span>
+            <span class="contact-value">пн-пт: 10:00-19:00</span>
+          </div>
+        </div>
+        <p class="contact-note">
+          Обработка заявок в выходные дни может занять больше времени.
+        </p>
+      </div>
+      
+      <section class="payment-section">
+        <h2 class="section-title">6. Изменение условий</h2>
+        <p class="payment-text">
+          Мы оставляем за собой право изменять условия оплаты и возврата. Актуальная версия всегда 
+          доступна на этой странице. Изменения вступают в силу с момента публикации.
+        </p>
+      </section>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer" id="contacts">
+    <div class="container site-footer__inner">
+        <section class="site-footer__column">
+            <h2 class="site-footer__title">Контакты</h2>
+            <div class="site-footer__block">
+                <p>Телефон поддержки</p>
+                <a href="tel:+71234567890" class="site-footer__link">
+                    +7 (123) 456‑78‑90
+                </a>
+                <p>Контактная почта</p>
+                <a href="mailto:pochta123@gmail.com" class="site-footer__link">
+                    pochta123@gmail.com
+                </a>
+            </div>
+        </section>
+
+        <section class="site-footer__column">
+            <h2 class="site-footer__title">Документы</h2>
+            <div class="site-footer__block">
+                <a href="/coffeShop/privacy.html" class="site-footer__link">Политика конфиденциальности</a>
+                <a href="/coffeShop/payment.html" class="site-footer__link">Условия оплаты и возврата</a>
+                <a href="/coffeShop/delivery.html" class="site-footer__link">Пользовательское соглашение</a>
+            </div>
+        </section>
+
+        <section class="site-footer__column">
+        <h2 class="site-footer__title">Социальные сети</h2>
+        <div class="site-footer__block">
+          <p>
+            Instagram:
+            <a href="https://instagram.com/instagram123" target="_blank" class="site-footer__link">
+              instagram123
+            </a>
+          </p>
+          <p>
+            Facebook:
+            <a href="https://facebook.com/facebook123" target="_blank" class="site-footer__link">
+              facebook123
+            </a>
+          </p>
+          <p>
+            Telegram
+            <a href="https://web.telegram.org/@Nekhlebov_1553" target="_blank" class="site-footer__link">
+              Nekhlebov_1553
+            </a>
+          </p>
+          <p>
+            VK:
+            <a href="https://vk.com/belorus47475863647" target="_blank" class="site-footer__link">
+              belorus47475863647
+            </a>
+          </p>
+        </div>
+      </section>
+    </div>
+</footer>
+
+<script src="/coffeShop/src/nav-highlight.js"></script>
+<script src="/coffeShop/src/nav-auth.js"></script>
+</body>
+</html>

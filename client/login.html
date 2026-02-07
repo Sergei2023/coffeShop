@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | Coffейня</title>
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="stylesheet" href="./src/styles/auth.css">
+</head>
+<body>
+    <header class="site-header">
+    <div class="container site-header__inner">
+        <a href="/coffeShop/" class="logo">Coffейня</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+            <ul class="main-nav__list">
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/">Главная</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/menu.html">Меню</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/about.html">О нас</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/contact.html">Контакты</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/cart.html" id="cartNavLink">
+                         Корзина <span id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth-buttons" id="authButtons"></div>
+    </div>
+</header>
+
+    <main class="container">
+        <div class="auth-tabs">
+            <button class="auth-tab active" data-tab="login">Вход</button>
+            <button class="auth-tab" data-tab="register">Регистрация</button>
+        </div>
+
+        <!-- Форма входа -->
+        <div class="auth-form active" id="loginFormContainer">
+            <h1 class="auth-title">Вход в аккаунт</h1>
+            <form class="auth-form__content" id="loginForm">
+                <div class="auth-field">
+                    <label class="auth-label" for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" class="auth-input" 
+                           placeholder="your@email.com" required>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" class="auth-input" 
+                           placeholder="Ваш пароль" required>
+                </div>
+                <button type="submit" class="button button--primary auth-submit">
+                    Войти
+                </button>
+            </form>
+            <!-- <div class="auth-demo">
+                <p>Демо доступ:</p>
+                <p><strong>Админ:</strong> admin@coffee.ru / admin123</p>
+                <p><strong>Пользователь:</strong> user@example.com / user123</p>
+            </div> -->
+            <div class="auth-message" id="loginMessage"></div>
+        </div>
+
+        <!-- Форма регистрации -->
+        <div class="auth-form" id="registerFormContainer">
+            <h1 class="auth-title">Регистрация</h1>
+            <form class="auth-form__content" id="registerForm">
+                <div class="auth-field">
+                    <label class="auth-label" for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" class="auth-input" 
+                           placeholder="your@email.com" required>
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="registerPassword">Пароль</label>
+                    <input type="password" id="registerPassword" class="auth-input" 
+                           placeholder="Не менее 6 символов" required minlength="6">
+                </div>
+                <div class="auth-field">
+                    <label class="auth-label" for="registerConfirm">Подтверждение пароля</label>
+                    <input type="password" id="registerConfirm" class="auth-input" 
+                           placeholder="Повторите пароль" required>
+                </div>
+                <button type="submit" class="button button--primary auth-submit">
+                    Зарегистрироваться
+                </button>
+            </form>
+            <div class="auth-message" id="registerMessage"></div>
+        </div>
+    </main>
+
+    <script src="src/auth.js"></script>
+    <script src="src/nav-auth.js"></script>
+</body>
+</html>

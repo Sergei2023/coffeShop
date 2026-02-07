@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const target = stat.getAttribute('data-count');
         const isMillions = stat.nextElementSibling.textContent.includes('миллион');
         
-        // Просто устанавливаем финальные значения
         if (isMillions) {
             stat.textContent = target + 'M';
         } else {

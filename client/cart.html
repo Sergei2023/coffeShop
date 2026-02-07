@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина | Coffейня</title>
+    <link rel="stylesheet" href="./src/styles/style.css">
+    <link rel="stylesheet" href="./src/styles/cart.css">
+</head>
+<body>
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a href="/coffeShop/" class="logo">Coffейня</a>
+        <nav class="main-nav" aria-label="Основная навигация">
+            <ul class="main-nav__list">
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/">Главная</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/menu.html">Меню</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/about.html">О нас</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/contact.html">Контакты</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/coffeShop/cart.html" id="cartNavLink">
+                         Корзина <span id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div class="auth-buttons" id="authButtons"></div>
+    </div>
+</header>
+
+    <main class="container cart-container">
+        <h1 class="cart-title">Ваша корзина</h1>
+        
+        <!-- Корзина для авторизованных -->
+        <div id="authCart" style="display: none;">
+            <div class="cart-items" id="cartItems">
+                <!-- Товары загрузятся через JS -->
+            </div>
+            
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Товаров:</span>
+                    <span id="totalItems">0</span>
+                </div>
+                <div class="summary-row">
+                    <span>Общая сумма:</span>
+                    <span class="cart-total" id="cartTotal">0 ₽</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="button button--primary" id="clearCartBtn">Очистить корзину</button>
+                    <button class="button button--primary" id="checkoutBtn">Оформить заказ</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Сообщение для неавторизованных -->
+        <div id="guestCart" class="guest-message">
+            <h2>Войдите в аккаунт</h2>
+            <p>Чтобы сохранить корзину и оформить заказ, пожалуйста, войдите в систему.</p>
+            <a href="/coffeShop/login.html" class="button button--primary">Войти</a>
+        </div>
+        
+        <!-- Пустая корзина -->
+        <div id="emptyCart" class="empty-cart" style="display: none;">
+            <h2>🛒 Корзина пуста</h2>
+            <p>Добавьте товары из меню, чтобы сделать заказ.</p>
+            <a href="/coffeShop/menu.html" class="button button--primary">Перейти в меню</a>
+        </div>
+    </main>
+
+    <script src="./src/nav-auth.js"></script>
+    <script src="./src/cart.js"></script>
+</body>
+</html>

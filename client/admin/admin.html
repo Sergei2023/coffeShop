@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>АРМ администратора | Coffейня</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Шапка админки -->
+  <header class="site-header admin-header">
+    <div class="site-header__inner">
+      <!-- Лого слева -->
+      <a href="/admin/admin.html" class="logo">
+        АРМ администратора | Coffейня
+      </a>
+      
+      <!-- Навигация справа -->
+      <nav class="admin-nav">
+        <ul class="admin-nav__list">
+          <!-- Почта админа -->
+          <li class="admin-nav__item">
+            <span class="admin-user__email" id="adminEmail"></span>
+          </li>
+          
+          <li class="admin-nav__separator">|</li>
+          
+          <!-- Кнопка на сайт -->
+          <li class="admin-nav__item">
+            <button class="admin-nav__link" id="goToSiteBtn">
+              На сайт
+            </button>
+          </li>
+          
+          <li class="admin-nav__separator">|</li>
+          
+          <!-- Кнопка выхода -->
+          <li class="admin-nav__item">
+            <button class="admin-nav__link admin-nav__link--logout" id="logoutBtn">
+              Выйти
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <!-- Форма входа -->
+    <section class="admin-auth" id="authSection">
+      <div class="container">
+        <div class="admin-auth__card">
+          <h1 class="admin-auth__title">Вход в АРМ администратора</h1>
+          <p class="admin-auth__subtitle">Используйте email и пароль администратора</p>
+          
+          <form class="admin-auth__form" id="loginForm">
+            <div class="admin-auth__field">
+              <label class="admin-auth__label" for="email">Email</label>
+              <input 
+                type="email" 
+                id="email" 
+                class="admin-auth__input" 
+                placeholder="admin@coffee.ru"
+                value="admin@coffee.ru"
+                required
+              >
+            </div>
+            
+            <div class="admin-auth__field">
+              <label class="admin-auth__label" for="password">Пароль</label>
+              <input 
+                type="password" 
+                id="password" 
+                class="admin-auth__input" 
+                placeholder="admin123"
+                value="admin123"
+                required
+              >
+            </div>
+            
+            <div class="admin-auth__actions">
+              <button type="submit" class="button button--primary admin-auth__submit">
+                Войти
+              </button>
+            </div>
+          </form>
+          
+          <div class="admin-auth__message" id="authMessage"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Основная админ-панель -->
+    <section class="admin-panel" id="adminPanel" style="display: none;">
+      <div class="container">
+        <!-- Заголовок -->
+        <div class="admin-panel-header">
+          <h1 class="admin-title">
+            Управление меню
+          </h1>
+        </div>
+
+        <!-- Статистика -->
+        <div class="admin-stats" id="statsSection">
+          <div class="admin-stats__card">
+            <h3 class="admin-stats__title">Всего товаров</h3>
+            <div class="admin-stats__value" id="totalItems">0</div>
+          </div>
+          <div class="admin-stats__card">
+            <h3 class="admin-stats__title">Активных</h3>
+            <div class="admin-stats__value" id="activeItems">0</div>
+          </div>
+          <div class="admin-stats__card">
+            <h3 class="admin-stats__title">Неактивных</h3>
+            <div class="admin-stats__value" id="inactiveItems">0</div>
+          </div>
+          <div class="admin-stats__card">
+            <h3 class="admin-stats__title">Категорий</h3>
+            <div class="admin-stats__value" id="totalCategories">0</div>
+          </div>
+        </div>
+
+        <!-- Новая панель фильтров в одну строку -->
+        <div class="filters-panel">
+          <!-- Поиск по названию -->
+          <div class="filter-group">
+            <div class="filter-search">
+              <input 
+                type="text" 
+                id="searchInput" 
+                class="filter-search__input" 
+                placeholder="Поиск по названию..."
+              >
+              <button class="filter-search__btn" id="searchBtn">
+                🔍
+              </button>
+            </div>
+          </div>
+
+          <!-- Категории -->
+          <div class="filter-group filter-group--dropdown">
+            <button class="filter-dropdown-btn" id="categoriesDropdownBtn">
+              <span class="filter-label">Категории</span>
+              <span class="filter-value" id="categoriesValue">Все</span>
+              <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="filter-dropdown" id="categoriesDropdown">
+              <div class="dropdown-content">
+                <div class="dropdown-header">
+                  <h4>Выберите категории</h4>
+                  <button class="dropdown-close">&times;</button>
+                </div>
+                <div class="dropdown-body">
+                  <div class="dropdown-checkboxes" id="categoriesCheckboxes">
+                    <!-- Категории будут загружены через JS -->
+                  </div>
+                  <div class="dropdown-actions">
+                    <button type="button" class="button button-small" id="selectAllCategoriesBtn">
+                      Выбрать все
+                    </button>
+                    <button type="button" class="button button-small" id="deselectAllCategoriesBtn">
+                      Сбросить
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Цена -->
+          <div class="filter-group filter-group--price">
+            <span class="filter-label">Цена:</span>
+            <input 
+              type="number" 
+              id="priceFrom" 
+              class="filter-input" 
+              placeholder="От"
+              min="0"
+            >
+            <span class="filter-separator">-</span>
+            <input 
+              type="number" 
+              id="priceTo" 
+              class="filter-input" 
+              placeholder="До"
+              min="0"
+            >
+          </div>
+
+          <!-- Статус -->
+          <div class="filter-group filter-group--dropdown">
+            <button class="filter-dropdown-btn" id="statusDropdownBtn">
+              <span class="filter-label">Статус</span>
+              <span class="filter-value" id="statusValue">Все</span>
+              <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="filter-dropdown" id="statusDropdown">
+              <div class="dropdown-content">
+                <div class="dropdown-options">
+                  <label class="dropdown-option">
+                    <input type="radio" name="status" value="all" checked>
+                    <span>Все товары</span>
+                  </label>
+                  <label class="dropdown-option">
+                    <input type="radio" name="status" value="active">
+                    <span>Только активные</span>
+                  </label>
+                  <label class="dropdown-option">
+                    <input type="radio" name="status" value="inactive">
+                    <span>Только архив</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Сбросить все -->
+          <div class="filter-group">
+            <button class="filter-reset-btn" id="resetAllFiltersBtn">
+              Сбросить все
+            </button>
+          </div>
+        </div>
+
+        <!-- Кнопка добавления товара -->
+        <div class="admin-add-item">
+          <button class="button button--primary admin-add-item__btn" id="addItemBtn">
+            + Добавить товар
+          </button>
+        </div>
+
+        <!-- Таблица товаров -->
+        <div class="admin-table-container">
+          <table class="admin-table" id="itemsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Название</th>
+                <th>Категория</th>
+                <th>Цена</th>
+                <th>Статус</th>
+                <th>Действия</th>
+              </tr>
+            </thead>
+            <tbody id="itemsTableBody">
+              <tr>
+                <td colspan="6" class="admin-table__empty">Загрузка данных...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Модальное окно товара -->
+  <div class="modal" id="itemModal" style="display: none;">
+    <div class="modal__overlay"></div>
+    <div class="modal__content">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle">Добавить товар</h2>
+        <button class="modal__close" id="closeModalBtn">&times;</button>
+      </div>
+      
+      <form class="modal__form" id="itemForm">
+        <input type="hidden" id="editItemId">
+        
+        <div class="modal__field">
+          <label class="modal__label" for="modalCategory">Категория *</label>
+          <select id="modalCategory" class="modal__select" required>
+            <option value="">Выберите категорию...</option>
+          </select>
+        </div>
+        
+        <div class="modal__field">
+          <label class="modal__label" for="modalName">Название *</label>
+          <input 
+            type="text" 
+            id="modalName" 
+            class="modal__input" 
+            placeholder="Например: Капучино"
+            required
+          >
+        </div>
+        
+        <div class="modal__field">
+          <label class="modal__label" for="modalPrice">Цена (₽) *</label>
+          <input 
+            type="number" 
+            step="0.01" 
+            min="0" 
+            id="modalPrice" 
+            class="modal__input" 
+            placeholder="0.00"
+            required
+          >
+        </div>
+        
+        <div class="modal__field">
+          <label class="modal__label" for="modalDescription">Описание</label>
+          <textarea 
+            id="modalDescription" 
+            class="modal__textarea" 
+            rows="3"
+            placeholder="Описание товара..."
+          ></textarea>
+        </div>
+        
+        <div class="modal__field">
+          <label class="modal__label" for="modalImage">URL картинки</label>
+          <input 
+            type="text" 
+            id="modalImage" 
+            class="modal__input" 
+            placeholder="/images/coffee.png"
+          >
+        </div>
+        
+        <div class="modal__field">
+          <label class="modal__label">
+            <input type="checkbox" id="modalActive" checked>
+            Активный товар
+          </label>
+        </div>
+        
+        <div class="modal__actions">
+          <button type="button" class="button modal__cancel" id="cancelBtn">
+            Отмена
+          </button>
+          <button type="submit" class="button button--primary modal__submit">
+            Сохранить
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

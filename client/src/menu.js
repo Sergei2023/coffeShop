@@ -6,8 +6,28 @@ async function loadMenuFromAPI() {
         const response = await fetch('http://localhost:3000/api/menu');
         if (!response.ok) throw new Error('Ошибка сети');
         const data = await response.json();
-        console.log('Данные получены:', data.length, 'товаров');
-        return data;
+        
+        // Логирование для отладки
+        console.log('Структура данных:', data);
+        
+        // Проверяем разные возможные форматы ответа
+        if (data && data.menu && Array.isArray(data.menu)) {
+            console.log('Данные получены:', data.menu.length, 'товаров');
+            return data.menu;
+        } else if (data && data.data && Array.isArray(data.data)) {
+            console.log('Данные получены:', data.data.length, 'товаров');
+            return data.data;
+        } else if (data && data.items && Array.isArray(data.items)) {
+            console.log('Данные получены:', data.items.length, 'товаров');
+            return data.items;
+        } else if (Array.isArray(data)) {
+            console.log('Данные получены:', data.length, 'товаров');
+            return data;
+        }
+        
+        console.warn('Неожиданный формат данных:', data);
+        return [];
+        
     } catch (error) {
         console.error('Не удалось загрузить меню:', error);
         return [];
@@ -16,12 +36,20 @@ async function loadMenuFromAPI() {
 
 function renderMenu(items) {
     const container = document.getElementById('menu-container');
-    //if (!container) {
-    //    console.error('#menu-container не найден');
-    //    return;
-    //}
-    // это я сделал если вдруг забуду запустить сервер (а то уже много раз попадался)
-    // ну и прикольно наверное
+    
+    // Проверка на null/undefined
+    if (!items) {
+        container.innerHTML = '<p class="empty-message">Данные не получены</p>';
+        return;
+    }
+    
+    // Проверка, что items - массив
+    if (!Array.isArray(items)) {
+        console.error('items не является массивом:', items);
+        container.innerHTML = '<p class="empty-message">Неверный формат данных</p>';
+        return;
+    }
+    
     if (items.length === 0) {
         container.innerHTML = '<p class="empty-message">Меню временно недоступно</p>';
         return;
@@ -35,7 +63,7 @@ function renderMenu(items) {
                 <p class="menu-card__desc">${item.description}</p>
                 <div class="menu-card__footer">
                     <div class="menu-card__price">${item.price} ₽</div>
-                    <button class="menu-card__btn" data-id="${item.id}">В корзину</button>
+                    <button class="menu-card__btn" onclick="cart.addToCart(${item.id})">В корзину</button>
                 </div>
             </div>
         </div>

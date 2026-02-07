@@ -28,3 +28,36 @@ INSERT INTO menu_items (category_id, name, description, price, image_url) VALUES
 (3, 'Тирамису', 'Итальянский десерт с кофе и маскарпоне', 320.00, '/images/tiramisu1.png'),
 (4, 'Круассан с шоколадом', 'Мягкий круасан с шоколадным кремом', 190.00, '/images/kruassan1.png'),
 (4, 'Круассан с ветчиной и сыром', 'Мягкий круассан с ветчиной, сыром и соусом', 200.00, '/images/kruassan2.png');
+
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password_hash VARCHAR(255) NOT NULL, -- Сюда будем сохранять ХЭШ пароля
+    role VARCHAR(20) DEFAULT 'user' CHECK (role IN ('user', 'admin'))
+);
+
+CREATE TABLE cart_items (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES menu_items(id),
+    quantity INTEGER DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE(user_id, product_id) -- чтобы один товар был один раз в корзине
+);
+
+CREATE TABLE orders (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES users(id),
+    total DECIMAL(10, 2) NOT NULL,
+    status VARCHAR(50) DEFAULT 'pending', -- pending, paid, cancelled, completed
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE order_items (
+    id SERIAL PRIMARY KEY,
+    order_id INTEGER REFERENCES orders(id) ON DELETE CASCADE,
+    product_id INTEGER REFERENCES menu_items(id),
+    product_name VARCHAR(200) NOT NULL,
+    product_price DECIMAL(10, 2) NOT NULL,
+    quantity INTEGER NOT NULL
+);
