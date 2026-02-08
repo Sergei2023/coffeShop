@@ -1,4 +1,3 @@
-// cart.js - логика работы корзины
 const API_BASE = 'http://localhost:3000';
 
 function updateCartCount(count = null) {
