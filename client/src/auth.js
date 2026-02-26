@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 headers: { 
                     'Content-Type': 'application/json',
-                    'Origin': 'http://localhost:5174' // ✅ Добавь заголовок Origin
+                    'Origin': 'http://localhost:5174'
                 },
                 body: JSON.stringify({ email, password })
             });

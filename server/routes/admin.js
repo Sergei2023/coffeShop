@@ -4,7 +4,6 @@ import adminController from '../controllers/adminController.js';
 
 const router = express.Router();
 
-// ВСЕ маршруты в этом файле требуют авторизации
 router.use(authMiddleware);
 
 // ==================== CRUD ДЛЯ ТОВАРОВ ====================
@@ -14,7 +13,6 @@ router.use(authMiddleware);
 // PUT    /api/admin/items/:id  - обновить товар (только админ)
 // DELETE /api/admin/items/:id  - удалить товар (только админ)
 
-// ПОИСК должен быть ПЕРЕД /items/:id
 router.get('/items/search', authMiddleware.isAdmin, adminController.searchItems);
 
 // Создать товар
