@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
 
-//для проверки токена
 const authMiddleware = (req, res, next) => {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
@@ -26,7 +25,6 @@ const authMiddleware = (req, res, next) => {
   }
 };
 
-//для проверки прав администратора
 authMiddleware.isAdmin = (req, res, next) => {
   if (req.user && req.user.role === 'admin') {
     next();

@@ -1,7 +1,6 @@
 import pool from '../db.js';
 
 const cartController = {
-  // Добавить товар в корзину
   async addToCart(req, res) {
     try {
       const { product_id, quantity = 1 } = req.body;
@@ -14,7 +13,6 @@ const cartController = {
         });
       }
       
-      // Проверяем существует ли товар
       const productExists = await pool.query(
         'SELECT id, name, price FROM menu_items WHERE id = $1 AND is_active = true',
         [product_id]
@@ -27,7 +25,6 @@ const cartController = {
         });
       }
       
-      // Добавляем или обновляем количество
       const result = await pool.query(
         `INSERT INTO cart_items (user_id, product_id, quantity)
          VALUES ($1, $2, $3)
@@ -52,7 +49,6 @@ const cartController = {
     }
   },
   
-  // Получить корзину пользователя
   async getCart(req, res) {
     try {
       const userId = req.user.id;
@@ -70,7 +66,6 @@ const cartController = {
         ORDER BY ci.created_at DESC
       `, [userId]);
       
-      // Вычисляем общую сумму
       const total = result.rows.reduce((sum, item) => {
         return sum + (parseFloat(item.product_price) * item.quantity);
       }, 0);
@@ -91,14 +86,12 @@ const cartController = {
     }
   },
   
-  // Обновить количество товара
   async updateCartItem(req, res) {
     try {
       const { id } = req.params;
       const { quantity } = req.body;
       const userId = req.user.id;
       
-      // Определяем изменение количества
       let quantityChange;
       if (quantity === 'increase') {
         quantityChange = '+ 1';
@@ -111,7 +104,6 @@ const cartController = {
         });
       }
       
-      // Сначала получаем текущее количество
       const currentItem = await pool.query(
         'SELECT quantity FROM cart_items WHERE id = $1 AND user_id = $2',
         [id, userId]
@@ -126,7 +118,6 @@ const cartController = {
       
       const currentQuantity = currentItem.rows[0].quantity;
       
-      // Если уменьшаем и количество станет 0 или меньше, удаляем товар
       if (quantity === 'decrease' && currentQuantity <= 1) {
         await pool.query(
           'DELETE FROM cart_items WHERE id = $1 AND user_id = $2',
@@ -139,7 +130,6 @@ const cartController = {
         });
       }
       
-      // Обновляем количество
       const result = await pool.query(
         `UPDATE cart_items 
          SET quantity = quantity ${quantityChange}
@@ -163,7 +153,6 @@ const cartController = {
     }
   },
   
-  // Очистить корзину
   async clearCart(req, res) {
     try {
       const userId = req.user.id;

@@ -19,7 +19,6 @@ router.post('/add', async (req, res) => {
             });
         }
         
-        // Проверяем существует ли товар
         const productExists = await pool.query(
             'SELECT id, name, price FROM menu_items WHERE id = $1 AND is_active = true',
             [product_id]
@@ -32,7 +31,6 @@ router.post('/add', async (req, res) => {
             });
         }
         
-        // Добавляем или обновляем количество
         const result = await pool.query(
             `INSERT INTO cart_items (user_id, product_id, quantity)
              VALUES ($1, $2, $3)
@@ -79,7 +77,6 @@ router.get('/', async (req, res) => {
             ORDER BY ci.created_at DESC
         `, [userId]);
         
-        // Общая стоимость
         const total = result.rows.reduce((sum, item) => {
             return sum + (parseFloat(item.product_price) * item.quantity);
         }, 0);
@@ -114,9 +111,7 @@ router.put('/:id', async (req, res) => {
             });
         }
         
-        // Определяем, что делать с количеством
         if (quantity === 'increase') {
-            // Увеличиваем на 1
             const result = await pool.query(
                 `UPDATE cart_items 
                  SET quantity = quantity + 1
@@ -139,7 +134,6 @@ router.put('/:id', async (req, res) => {
             });
             
         } else if (quantity === 'decrease') {
-            // Уменьшаем на 1, если станет 0 - удаляем
             const currentItem = await pool.query(
                 'SELECT quantity FROM cart_items WHERE id = $1 AND user_id = $2',
                 [id, userId]
@@ -155,7 +149,6 @@ router.put('/:id', async (req, res) => {
             const currentQuantity = currentItem.rows[0].quantity;
             
             if (currentQuantity <= 1) {
-                // Удаляем товар
                 await pool.query(
                     'DELETE FROM cart_items WHERE id = $1 AND user_id = $2',
                     [id, userId]
@@ -166,7 +159,6 @@ router.put('/:id', async (req, res) => {
                     message: 'Товар удален из корзины'
                 });
             } else {
-                // Уменьшаем на 1
                 const result = await pool.query(
                     `UPDATE cart_items 
                      SET quantity = quantity - 1

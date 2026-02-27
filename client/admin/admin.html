@@ -7,25 +7,20 @@
   <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-  <!-- Шапка админки -->
   <header class="site-header admin-header">
     <div class="site-header__inner">
-      <!-- Лого слева -->
       <a href="/admin/admin.html" class="logo">
         АРМ администратора | Coffейня
       </a>
       
-      <!-- Навигация справа -->
       <nav class="admin-nav">
         <ul class="admin-nav__list">
-          <!-- Почта админа -->
           <li class="admin-nav__item">
             <span class="admin-user__email" id="adminEmail"></span>
           </li>
           
           <li class="admin-nav__separator">|</li>
           
-          <!-- Кнопка на сайт -->
           <li class="admin-nav__item">
             <button class="admin-nav__link" id="goToSiteBtn">
               На сайт
@@ -34,7 +29,6 @@
           
           <li class="admin-nav__separator">|</li>
           
-          <!-- Кнопка выхода -->
           <li class="admin-nav__item">
             <button class="admin-nav__link admin-nav__link--logout" id="logoutBtn">
               Выйти
@@ -46,7 +40,6 @@
   </header>
 
   <main class="admin-main">
-    <!-- Форма входа -->
     <section class="admin-auth" id="authSection">
       <div class="container">
         <div class="admin-auth__card">
@@ -90,17 +83,14 @@
       </div>
     </section>
 
-    <!-- Основная админ-панель -->
     <section class="admin-panel" id="adminPanel" style="display: none;">
       <div class="container">
-        <!-- Заголовок -->
         <div class="admin-panel-header">
           <h1 class="admin-title">
             Управление меню
           </h1>
         </div>
 
-        <!-- Статистика -->
         <div class="admin-stats" id="statsSection">
           <div class="admin-stats__card">
             <h3 class="admin-stats__title">Всего товаров</h3>
@@ -120,9 +110,7 @@
           </div>
         </div>
 
-        <!-- Новая панель фильтров в одну строку -->
         <div class="filters-panel">
-          <!-- Поиск по названию -->
           <div class="filter-group">
             <div class="filter-search">
               <input 
@@ -137,7 +125,6 @@
             </div>
           </div>
 
-          <!-- Категории -->
           <div class="filter-group filter-group--dropdown">
             <button class="filter-dropdown-btn" id="categoriesDropdownBtn">
               <span class="filter-label">Категории</span>
@@ -152,7 +139,6 @@
                 </div>
                 <div class="dropdown-body">
                   <div class="dropdown-checkboxes" id="categoriesCheckboxes">
-                    <!-- Категории будут загружены через JS -->
                   </div>
                   <div class="dropdown-actions">
                     <button type="button" class="button button-small" id="selectAllCategoriesBtn">
@@ -167,7 +153,6 @@
             </div>
           </div>
 
-          <!-- Цена -->
           <div class="filter-group filter-group--price">
             <span class="filter-label">Цена:</span>
             <input 
@@ -187,7 +172,6 @@
             >
           </div>
 
-          <!-- Статус -->
           <div class="filter-group filter-group--dropdown">
             <button class="filter-dropdown-btn" id="statusDropdownBtn">
               <span class="filter-label">Статус</span>
@@ -214,7 +198,6 @@
             </div>
           </div>
 
-          <!-- Сбросить все -->
           <div class="filter-group">
             <button class="filter-reset-btn" id="resetAllFiltersBtn">
               Сбросить все
@@ -222,14 +205,12 @@
           </div>
         </div>
 
-        <!-- Кнопка добавления товара -->
         <div class="admin-add-item">
           <button class="button button--primary admin-add-item__btn" id="addItemBtn">
             + Добавить товар
           </button>
         </div>
 
-        <!-- Таблица товаров -->
         <div class="admin-table-container">
           <table class="admin-table" id="itemsTable">
             <thead>
@@ -253,7 +234,6 @@
     </section>
   </main>
 
-  <!-- Модальное окно товара -->
   <div class="modal" id="itemModal" style="display: none;">
     <div class="modal__overlay"></div>
     <div class="modal__content">

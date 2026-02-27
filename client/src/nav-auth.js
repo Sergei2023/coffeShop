@@ -20,7 +20,6 @@ function updateAuthButtons() {
     authButtonsContainer.innerHTML = '';
     
     if (token && user) {
-        // Пользователь авторизован
         const userInfo = document.createElement('div');
         userInfo.className = 'auth-user';
         
@@ -38,7 +37,6 @@ function updateAuthButtons() {
         
         authButtonsContainer.appendChild(userInfo);
         
-        // Кнопка админки для администраторов
         if (user.role === 'admin') {
             const adminBtn = document.createElement('a');
             adminBtn.href = '/coffeShop/admin/admin.html';
@@ -47,7 +45,6 @@ function updateAuthButtons() {
             authButtonsContainer.appendChild(adminBtn);
         }
         
-        // Кнопка выхода
         const logoutBtn = document.createElement('button');
         logoutBtn.className = 'auth-button auth-button--logout';
         logoutBtn.textContent = 'Выйти';
@@ -55,7 +52,6 @@ function updateAuthButtons() {
         authButtonsContainer.appendChild(logoutBtn);
         
     } else {
-        // Пользователь не авторизован - показываем кнопку входа
         const loginBtn = document.createElement('a');
         loginBtn.href = '/coffeShop/login.html';
         loginBtn.className = 'auth-button auth-button--login';
@@ -72,22 +68,17 @@ function logout() {
 
         showToast('Вы успешно вышли из системы');
         
-        // Обновляем кнопки
         setTimeout(() => {
             updateAuthButtons();
             window.location.href = '/coffeShop/';
-            //window.location.reload();
         }, 1000);
     }
 }
 
-// Вспомогательная функция для уведомлений
 function showToast(message, type = 'success') {
-    // Удаляем старый тост, если есть
     const oldToast = document.getElementById('authToast');
     if (oldToast) oldToast.remove();
     
-    // Создаём новый тост
     const toast = document.createElement('div');
     toast.id = 'authToast';
     toast.textContent = message;
@@ -104,7 +95,6 @@ function showToast(message, type = 'success') {
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     `;
     
-    // Добавляем стили для анимации
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideIn {
@@ -116,7 +106,6 @@ function showToast(message, type = 'success') {
     
     document.body.appendChild(toast);
     
-    // Автоматически скрываем через 3 секунды
     setTimeout(() => {
         if (toast.parentNode) {
             toast.style.animation = 'slideOut 0.3s ease';
@@ -125,11 +114,9 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-// Проверка авторизации для защищённых страниц
 function requireAuth(redirectTo = '/coffeShop/login.html') {
     const token = localStorage.getItem('authToken');
     if (!token) {
-        // Сохраняем URL для возврата после входа
         localStorage.setItem('returnUrl', window.location.href);
         window.location.href = redirectTo;
         return false;
@@ -137,7 +124,6 @@ function requireAuth(redirectTo = '/coffeShop/login.html') {
     return true;
 }
 
-// Проверка прав администратора
 function requireAdmin(redirectTo = '/') {
     const user = JSON.parse(localStorage.getItem('authUser') || 'null');
     if (!user || user.role !== 'admin') {
@@ -150,12 +136,10 @@ function requireAdmin(redirectTo = '/') {
     return true;
 }
 
-// Получить токен для API запросов
 function getAuthToken() {
     return localStorage.getItem('authToken');
 }
 
-// Получить данные пользователя
 function getCurrentUser() {
     return JSON.parse(localStorage.getItem('authUser') || 'null');
 }
@@ -186,7 +170,6 @@ async function updateCartCounter() {
     }
 }
 
-// Вызывай после входа/выхода
 function logout() {
     if (confirm('Вы действительно хотите выйти?')) {
         localStorage.removeItem('authToken');
@@ -199,7 +182,6 @@ function logout() {
 
 
 
-// Обнови auth объект:
 window.auth = {
     updateAuthButtons,
     logout,

@@ -7,7 +7,6 @@ let tokenCheckInterval;
 let selectedCategories = [];
 let currentFilter = 'all';
 
-// ===== DOM ЭЛЕМЕНТЫ =====
 const authSection = document.getElementById('authSection');
 const adminPanel = document.getElementById('adminPanel');
 const loginForm = document.getElementById('loginForm');
@@ -30,9 +29,6 @@ const statsElements = {
   totalCategories: document.getElementById('totalCategories')
 };
 
-// ===== ФУНКЦИИ РАБОТЫ С API =====
-
-// Авторизация
 async function login(email, password) {
   try {
     showMessage('Проверяем данные...', 'info');
@@ -49,7 +45,6 @@ async function login(email, password) {
       throw new Error(data.error || 'Ошибка авторизации');
     }
     
-    // Сохраняем токен и данные пользователя
     currentToken = data.token;
     currentUser = data.user;
     localStorage.setItem('adminToken', currentToken);
@@ -67,7 +62,6 @@ async function login(email, password) {
   }
 }
 
-// Выход из системы
 function logout() {
   if (confirm('Вы действительно хотите выйти?')) {
     localStorage.removeItem('adminToken');
@@ -78,7 +72,6 @@ function logout() {
   }
 }
 
-// Загрузка товаров
 async function loadItems() {
   try {
     console.log('📦 Начинаем загрузку товаров...');
@@ -122,7 +115,6 @@ async function loadItems() {
   }
 }
 
-// Загрузка категорий
 async function loadCategories() {
   try {
     console.log('📂 Начинаем загрузку категорий...');
@@ -152,7 +144,6 @@ async function loadCategories() {
     
     console.log(`✅ Загружено категорий: ${categories.length}`);
     
-    // Заполняем выпадающий список в форме
     modalCategory.innerHTML = '<option value="">Выберите категорию...</option>';
     categories.forEach(cat => {
       const option = document.createElement('option');
@@ -161,14 +152,12 @@ async function loadCategories() {
       modalCategory.appendChild(option);
     });
     
-    //Инициализируем выбранные категории (по умолчанию все)
     if (selectedCategories.length === 0 && categories.length > 0) {
       selectedCategories = categories.map(cat => cat.id);
       updateCategoriesValue();
       console.log('✅ Выбраны все категории по умолчанию:', selectedCategories);
     }
-    
-    // Заполняем выпадающий список категорий в фильтрах
+
     populateCategoriesFilter();
     
     return categories;
@@ -178,7 +167,6 @@ async function loadCategories() {
   }
 }
 
-// Заполнить фильтр категорий
 function populateCategoriesFilter() {
   const categoriesCheckboxes = document.getElementById('categoriesCheckboxes');
   if (!categoriesCheckboxes) return;
@@ -193,11 +181,9 @@ function populateCategoriesFilter() {
     </div>
   `).join('');
   
-  // Добавляем обработчики событий для чекбоксов
   const checkboxes = categoriesCheckboxes.querySelectorAll('input[type="checkbox"]');
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
-      // Обновляем выбранные категории при изменении чекбокса
       const categoryId = parseInt(checkbox.value);
       if (checkbox.checked) {
         if (!selectedCategories.includes(categoryId)) {
@@ -213,7 +199,6 @@ function populateCategoriesFilter() {
   });
 }
 
-// Обновить текст в кнопке категорий
 function updateCategoriesValue() {
   const categoriesValue = document.getElementById('categoriesValue');
   if (!categoriesValue) return;
@@ -227,7 +212,6 @@ function updateCategoriesValue() {
   }
 }
 
-// Обновить текст в кнопке статуса
 function updateStatusValue() {
   const statusValue = document.getElementById('statusValue');
   if (!statusValue) return;
@@ -339,9 +323,7 @@ async function restoreItem(id) {
   }
 }
 
-// ===== ФУНКЦИИ ФИЛЬТРАЦИИ И СОРТИРОВКИ =====
 
-// Применить фильтры
 function applyFilters() {
   console.log('🔍 Применяем фильтры...');
   
@@ -351,19 +333,15 @@ function applyFilters() {
     return;
   }
   
-  // Получаем значения из полей ввода цены
   const priceFromInput = document.getElementById('priceFrom');
   const priceToInput = document.getElementById('priceTo');
   
-  // Преобразуем значения цены
   let localPriceFrom = priceFromInput?.value ? parseFloat(priceFromInput.value) : null;
   let localPriceTo = priceToInput?.value ? parseFloat(priceToInput.value) : null;
   
-  // Проверяем валидность цен
   if (localPriceFrom !== null && isNaN(localPriceFrom)) localPriceFrom = null;
   if (localPriceTo !== null && isNaN(localPriceTo)) localPriceTo = null;
   
-  // Проверяем что "от" не больше "до"
   if (localPriceFrom !== null && localPriceTo !== null && localPriceFrom > localPriceTo) {
     localPriceFrom = null;
     localPriceTo = null;
@@ -378,7 +356,6 @@ function applyFilters() {
   
   let filteredItems = [...allItems];
   
-  // 1. Фильтр по статусу
   if (currentFilter === 'active') {
     filteredItems = filteredItems.filter(item => item.is_active);
     console.log('После фильтра активных:', filteredItems.length);
@@ -387,16 +364,13 @@ function applyFilters() {
     console.log('После фильтра неактивных:', filteredItems.length);
   }
   
-  // 2. Фильтр по категориям (если выбраны категории)
   if (selectedCategories.length > 0) {
     filteredItems = filteredItems.filter(item => {
-      // Проверяем что у товара есть категория и она в выбранных
       return item.category_id && selectedCategories.includes(item.category_id);
     });
     console.log('После фильтра категорий:', filteredItems.length);
   }
   
-  // 3. Фильтр по цене
   if (localPriceFrom !== null) {
     filteredItems = filteredItems.filter(item => {
       const itemPrice = parseFloat(item.price) || 0;
@@ -413,7 +387,6 @@ function applyFilters() {
     console.log('После фильтра "цена до":', filteredItems.length);
   }
   
-  // 4. Поиск по названию (если есть)
   const searchTerm = document.getElementById('searchInput')?.value.trim();
   if (searchTerm) {
     filteredItems = filteredItems.filter(item =>
@@ -427,37 +400,29 @@ function applyFilters() {
   renderItemsTable(filteredItems);
 }
 
-// Сбросить все фильтры
 function resetAllFilters() {
-  // Сбросить категории
   selectedCategories = categories.map(cat => cat.id);
   updateCategoriesValue();
   populateCategoriesFilter();
   
-  // Сбросить статус
   currentFilter = 'all';
   document.querySelectorAll('input[name="status"]').forEach(radio => {
     radio.checked = radio.value === 'all';
   });
   updateStatusValue();
   
-  // Сбросить цену
   document.getElementById('priceFrom').value = '';
   document.getElementById('priceTo').value = '';
   
-  // Сбросить поиск
   document.getElementById('searchInput').value = '';
   
-  // Закрыть все выпадающие меню
   closeAllDropdowns();
   
-  // Применить сброшенные фильтры
   applyFilters();
   
   console.log('✅ Все фильтры сброшены');
 }
 
-// Закрыть все выпадающие меню
 function closeAllDropdowns() {
   document.querySelectorAll('.filter-dropdown').forEach(dropdown => {
     dropdown.classList.remove('show');
@@ -467,10 +432,8 @@ function closeAllDropdowns() {
   });
 }
 
-// ===== НАСТРОЙКА ФИЛЬТРОВ =====
 
 function setupFilters() {
-  // 1. Поиск по названию
   const searchBtn = document.getElementById('searchBtn');
   const searchInput = document.getElementById('searchInput');
   
@@ -485,12 +448,10 @@ function setupFilters() {
     searchInput.addEventListener('input', applyFilters);
   }
   
-  // 2. Категории (выпадающий список)
   const categoriesDropdownBtn = document.getElementById('categoriesDropdownBtn');
   const categoriesDropdown = document.getElementById('categoriesDropdown');
   
   if (categoriesDropdownBtn && categoriesDropdown) {
-    // Открытие/закрытие выпадающего списка
     categoriesDropdownBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = categoriesDropdown.classList.contains('show');
@@ -502,7 +463,6 @@ function setupFilters() {
       }
     });
     
-    // Закрытие по клику на крестик
     const closeBtn = categoriesDropdown.querySelector('.dropdown-close');
     if (closeBtn) {
       closeBtn.addEventListener('click', () => {
@@ -511,7 +471,6 @@ function setupFilters() {
       });
     }
     
-    // Выбрать все категории
     const selectAllBtn = document.getElementById('selectAllCategoriesBtn');
     if (selectAllBtn) {
       selectAllBtn.addEventListener('click', () => {
@@ -528,7 +487,6 @@ function setupFilters() {
       });
     }
     
-    // Сбросить все категории
     const deselectAllBtn = document.getElementById('deselectAllCategoriesBtn');
     if (deselectAllBtn) {
       deselectAllBtn.addEventListener('click', () => {
@@ -543,7 +501,6 @@ function setupFilters() {
     }
   }
   
-  // 3. Цена - автоматическое применение
   const priceFromInput = document.getElementById('priceFrom');
   const priceToInput = document.getElementById('priceTo');
   
@@ -555,12 +512,10 @@ function setupFilters() {
     priceToInput.addEventListener('input', applyFilters);
   }
   
-  // 4. Статус (выпадающий список)
   const statusDropdownBtn = document.getElementById('statusDropdownBtn');
   const statusDropdown = document.getElementById('statusDropdown');
   
   if (statusDropdownBtn && statusDropdown) {
-    // Открытие/закрытие выпадающего списка
     statusDropdownBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       const isOpen = statusDropdown.classList.contains('show');
@@ -572,16 +527,14 @@ function setupFilters() {
       }
     });
     
-    // Настройка обработчиков для радиокнопок статуса
     const statusRadios = statusDropdown.querySelectorAll('input[name="status"]');
     statusRadios.forEach(radio => {
       radio.addEventListener('change', () => {
         if (radio.checked) {
           currentFilter = radio.value;
           updateStatusValue();
-          applyFilters(); // Автоматически применяем фильтр
+          applyFilters();
           
-          // Закрываем выпадающий список через небольшой таймаут
           setTimeout(() => {
             statusDropdown.classList.remove('show');
             statusDropdownBtn.classList.remove('active');
@@ -590,7 +543,6 @@ function setupFilters() {
       });
     });
     
-    // Закрытие по клику на крестик (если есть)
     const statusCloseBtn = statusDropdown.querySelector('.dropdown-close');
     if (statusCloseBtn) {
       statusCloseBtn.addEventListener('click', () => {
@@ -600,13 +552,11 @@ function setupFilters() {
     }
   }
   
-  // 5. Сбросить все фильтры
   const resetAllFiltersBtn = document.getElementById('resetAllFiltersBtn');
   if (resetAllFiltersBtn) {
     resetAllFiltersBtn.addEventListener('click', resetAllFilters);
   }
   
-  // Закрытие выпадающих меню при клике вне их
   document.addEventListener('click', (e) => {
     if (!e.target.closest('.filter-dropdown') && !e.target.closest('.filter-dropdown-btn')) {
       closeAllDropdowns();
@@ -614,9 +564,7 @@ function setupFilters() {
   });
 }
 
-// ===== ФУНКЦИИ ЧИСТОЙ АДМИНКИ =====
 
-// Кнопка "Перейти на сайт"
 function setupGoToSiteButton() {
   const goToSiteBtn = document.getElementById('goToSiteBtn');
   if (goToSiteBtn) {
@@ -626,9 +574,7 @@ function setupGoToSiteButton() {
   }
 }
 
-// ===== ФУНКЦИИ ОТОБРАЖЕНИЯ =====
 
-// Показать сообщение
 function showMessage(text, type = 'info') {
   authMessage.textContent = text;
   authMessage.className = 'admin-auth__message';
@@ -642,21 +588,17 @@ function showMessage(text, type = 'info') {
   }
 }
 
-// Переключение между панелями
 function switchToAdminPanel() {
   authSection.style.display = 'none';
   adminPanel.style.display = 'block';
   
-  // Показываем email админа
   const adminEmail = document.getElementById('adminEmail');
   if (adminEmail && currentUser) {
     adminEmail.textContent = currentUser.email;
   }
   
-  // Настраиваем навигацию
   setupGoToSiteButton();
   
-  // Загружаем данные
   loadItems();
   loadCategories();
   
@@ -668,7 +610,6 @@ function switchToAuthPanel() {
   adminPanel.style.display = 'none';
 }
 
-// Рендер таблицы товаров
 function renderItemsTable(items) {
   if (!itemsTableBody) return;
   
@@ -717,7 +658,6 @@ function renderItemsTable(items) {
   `).join('');
 }
 
-// Показать загрузку таблицы
 function showTableLoading() {
   if (!itemsTableBody) return;
   itemsTableBody.innerHTML = `
@@ -729,7 +669,6 @@ function showTableLoading() {
   `;
 }
 
-// Показать ошибку таблицы
 function showTableError(message) {
   if (!itemsTableBody) return;
   itemsTableBody.innerHTML = `
@@ -741,7 +680,6 @@ function showTableError(message) {
   `;
 }
 
-// Обновить статистику
 function updateStats() {
   if (!allItems) return;
   
@@ -754,9 +692,7 @@ function updateStats() {
   if (statsElements.totalCategories) statsElements.totalCategories.textContent = categories.length;
 }
 
-// ===== РАБОТА С МОДАЛЬНЫМ ОКНОМ ТОВАРА =====
 
-// Открыть модальное окно для создания
 function openCreateModal() {
   modalTitle.textContent = 'Добавить товар';
   itemForm.reset();
@@ -765,7 +701,6 @@ function openCreateModal() {
   itemModal.style.display = 'flex';
 }
 
-// Открыть модальное окно для редактирования
 function openEditModal(id) {
   const item = allItems.find(i => i.id === id);
   if (!item) return;
@@ -782,19 +717,16 @@ function openEditModal(id) {
   itemModal.style.display = 'flex';
 }
 
-// Закрыть модальное окно
 function closeModal() {
   itemModal.style.display = 'none';
 }
 
-// Обработка формы товара
 async function handleItemFormSubmit(e) {
   e.preventDefault();
   
   const id = document.getElementById('editItemId').value;
   const isEdit = !!id;
   
-  // Собираем данные
   const itemData = {
     category_id: parseInt(document.getElementById('modalCategory').value),
     name: document.getElementById('modalName').value.trim(),
@@ -822,7 +754,6 @@ async function handleItemFormSubmit(e) {
   }
 }
 
-// ===== ФУНКЦИИ ПОДТВЕРЖДЕНИЯ =====
 
 async function confirmDelete(id) {
   const item = allItems.find(i => i.id === id);
@@ -852,13 +783,9 @@ async function confirmRestore(id) {
   }
 }
 
-// ===== ИНИЦИАЛИЗАЦИЯ =====
-
-// Запускаем приложение
 function init() {
   console.log('Админ-панель инициализируется...');
   
-  // Проверяем токен
   const token = localStorage.getItem('adminToken');
   const user = JSON.parse(localStorage.getItem('adminUser') || 'null');
   
@@ -870,7 +797,6 @@ function init() {
     switchToAuthPanel();
   }
   
-  // Настройка событий
   if (loginForm) {
     loginForm.addEventListener('submit', async (e) => {
       e.preventDefault();
@@ -880,7 +806,6 @@ function init() {
       try {
         await login(email, password);
       } catch (error) {
-        // Ошибка уже показана в функции login
       }
     });
   }
@@ -905,7 +830,6 @@ function init() {
     itemForm.addEventListener('submit', handleItemFormSubmit);
   }
   
-  // Закрытие модального окна по клику на оверлей
   if (itemModal) {
     itemModal.addEventListener('click', (e) => {
       if (e.target.classList.contains('modal__overlay')) {
@@ -914,19 +838,15 @@ function init() {
     });
   }
   
-  // Настройка фильтров
   setupFilters();
   
-  // Настраиваем кнопку "Перейти на сайт"
   setupGoToSiteButton();
   
   console.log('Админ-панель готова!');
 }
 
-// Делаем функции глобальными
 window.openEditModal = openEditModal;
 window.confirmDelete = confirmDelete;
 window.confirmRestore = confirmRestore;
 
-// Запускаем приложение
 document.addEventListener('DOMContentLoaded', init);

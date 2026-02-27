@@ -7,10 +7,8 @@ async function loadMenuFromAPI() {
         if (!response.ok) throw new Error('Ошибка сети');
         const data = await response.json();
         
-        // Логирование для отладки
         console.log('Структура данных:', data);
         
-        // Проверяем разные возможные форматы ответа
         if (data && data.menu && Array.isArray(data.menu)) {
             console.log('Данные получены:', data.menu.length, 'товаров');
             return data.menu;
@@ -37,13 +35,11 @@ async function loadMenuFromAPI() {
 function renderMenu(items) {
     const container = document.getElementById('menu-container');
     
-    // Проверка на null/undefined
     if (!items) {
         container.innerHTML = '<p class="empty-message">Данные не получены</p>';
         return;
     }
     
-    // Проверка, что items - массив
     if (!Array.isArray(items)) {
         console.error('items не является массивом:', items);
         container.innerHTML = '<p class="empty-message">Неверный формат данных</p>';

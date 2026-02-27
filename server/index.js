@@ -20,21 +20,12 @@ const adminPath = path.join(clientPath, 'admin');
 console.log('📁 Пути проверены:');
 console.log('Админка:', fs.existsSync(adminPath) ? '✅ найдена' : '❌ не найдена');
 
-// ПРОСТОЙ И РАБОЧИЙ CORS
 app.use(cors({
     origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
 }));
-
-// более безопасный вариант:
-// app.use(cors({
-//     origin: 'http://localhost:5174',
-//     credentials: true,
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
-//     allowedHeaders: ['Content-Type', 'Authorization']
-// }));
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -45,12 +36,10 @@ app.use((req, res, next) => {
     next();
 });
 
-// 1. API маршруты ПЕРВЫМИ
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/cart', cartRoutes);
 
-// 2. Публичные API
 app.get('/api/menu', async (req, res) => {
     try {
         const result = await pool.query(`
@@ -75,15 +64,10 @@ app.get('/api/test', (req, res) => {
     });
 });
 
-// 3. СТАТИКА - ВАЖЕН ПОРЯДОК!
-
-// 3.1 Сначала общая статика клиента
 app.use(express.static(clientPath));
 
-// 3.2 Затем статика для картинок
 app.use('/images', express.static(path.join(clientPath, 'public/images')));
 
-// 3.3 ОЧЕНЬ ВАЖНО: явный маршрут для /admin ПЕРЕД статикой
 app.get('/admin', (req, res) => {
     const adminHtml = path.join(adminPath, 'admin.html');
     if (fs.existsSync(adminHtml)) {
@@ -93,9 +77,7 @@ app.get('/admin', (req, res) => {
     }
 });
 
-// 3.4 Статика для файлов в /admin (css, js)
 app.use('/admin', express.static(adminPath, {
-    // Настройки для правильного определения MIME-типов
     setHeaders: (res, path) => {
         if (path.endsWith('.js')) {
             res.setHeader('Content-Type', 'application/javascript');
@@ -106,7 +88,6 @@ app.use('/admin', express.static(adminPath, {
     }
 }));
 
-// ПРОСТОЙ ТЕСТОВЫЙ МАРШРУТ ДЛЯ ПРОВЕРКИ
 app.post('/api/test-post', (req, res) => {
     console.log('Test POST received:', req.body);
     res.json({ 

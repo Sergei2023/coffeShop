@@ -14,7 +14,6 @@ function updateCartCount(count = null) {
     }
 }
 
-// ФУНКЦИЯ РЕНДЕРА КОРЗИНЫ
 function renderCart(items) {
     const cartItemsContainer = document.getElementById('cartItems');
     if (!cartItemsContainer) return;
@@ -31,7 +30,6 @@ function renderCart(items) {
         const itemElement = document.createElement('div');
         itemElement.className = 'cart-item';
         
-        // Форматируем цену и общую сумму
         const price = parseFloat(item.product_price) || 0;
         const quantity = item.quantity || 1;
         const totalPrice = price * quantity;
@@ -59,7 +57,6 @@ function renderCart(items) {
         cartItemsContainer.appendChild(itemElement);
     });
     
-    // Добавляем обработчики событий
     document.querySelectorAll('.quantity-btn.minus').forEach(btn => {
         btn.addEventListener('click', () => updateQuantity(btn.dataset.id, -1));
     });
@@ -73,7 +70,6 @@ function renderCart(items) {
     });
 }
 
-// ФУНКЦИЯ ОБНОВЛЕНИЯ ИТОГОВ
 function updateSummary(total, count) {
     const totalItemsElement = document.getElementById('totalItems');
     const cartTotalElement = document.getElementById('cartTotal');
@@ -89,7 +85,6 @@ function updateSummary(total, count) {
     }
 }
 
-// ФУНКЦИЯ ОБНОВЛЕНИЯ КОЛИЧЕСТВА
 async function updateQuantity(itemId, change) {
     try {
         const token = localStorage.getItem('authToken');
@@ -124,7 +119,6 @@ async function updateQuantity(itemId, change) {
     }
 }
 
-// ФУНКЦИЯ УДАЛЕНИЯ ТОВАРА
 async function removeFromCart(itemId) {
     if (!confirm('Удалить товар из корзины?')) return;
     
@@ -158,7 +152,6 @@ async function removeFromCart(itemId) {
     }
 }
 
-// ФУНКЦИЯ ОЧИСТКИ КОРЗИНЫ
 async function clearCart() {
     if (!confirm('Очистить всю корзину?')) return;
     
@@ -192,7 +185,6 @@ async function clearCart() {
     }
 }
 
-// ФУНКЦИЯ ОФОРМЛЕНИЯ ЗАКАЗА
 async function checkout() {
     alert('Функция оформления заказа пока в разработке');
     return;
@@ -220,21 +212,17 @@ async function checkout() {
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Проверяем авторизацию ТОЛЬКО если мы на странице корзины
     const guestCart = document.getElementById('guestCart');
     const authCart = document.getElementById('authCart');
     const emptyCart = document.getElementById('emptyCart');
     
-    // Если этих элементов нет - мы не на странице cart.html
     if (!guestCart || !authCart || !emptyCart) {
         console.log('Не на странице корзины, пропускаем инициализацию');
         return;
     }
     
-    // ПРОВЕРЯЕМ ВАЛИДНОСТЬ ТОКЕНА ПРИ ЗАГРУЗКЕ
     checkAuthAndLoadCart();
     
-    // Обработчики кнопок
     const clearCartBtn = document.getElementById('clearCartBtn');
     const checkoutBtn = document.getElementById('checkoutBtn');
     
@@ -244,7 +232,6 @@ document.addEventListener('DOMContentLoaded', function() {
     updateCartCount();
 });
 
-// НОВАЯ ФУНКЦИЯ: Проверка авторизации и загрузка корзины
 async function checkAuthAndLoadCart() {
     const guestCart = document.getElementById('guestCart');
     const authCart = document.getElementById('authCart');
@@ -253,14 +240,12 @@ async function checkAuthAndLoadCart() {
     const user = JSON.parse(localStorage.getItem('authUser') || 'null');
     
     if (!token || !user) {
-        // Неавторизованный
         guestCart.style.display = 'block';
         authCart.style.display = 'none';
         document.getElementById('emptyCart').style.display = 'none';
         return;
     }
     
-    // Проверяем валидность токена
     try {
         const response = await fetch(`${API_BASE}/api/cart`, {
             headers: { 
@@ -293,13 +278,11 @@ async function checkAuthAndLoadCart() {
         }
     } catch (error) {
         console.error('Ошибка проверки токена:', error);
-        // При ошибке сети показываем гостевой экран
         guestCart.style.display = 'block';
         authCart.style.display = 'none';
     }
 }
 
-// Загрузить корзину
 async function loadCart() {
     try {
         const token = localStorage.getItem('authToken');
@@ -310,7 +293,6 @@ async function loadCart() {
             }
         });
         
-        // ДОПОЛНИТЕЛЬНАЯ ПРОВЕРКА
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
@@ -346,5 +328,4 @@ async function loadCart() {
     }
 }
 
-//  функция addToCart
 addToCart

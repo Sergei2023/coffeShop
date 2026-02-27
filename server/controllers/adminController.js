@@ -1,13 +1,11 @@
 import pool from '../db.js';
 
 const adminController = {
-  // ==================== CREATE ====================
   // Создать новый товар в меню
   async createItem(req, res) {
     try {
       const { category_id, name, description, price, image_url } = req.body;
 
-      // Проверка обязательных полей
       if (!category_id || !name || !price) {
         return res.status(400).json({
           success: false,
@@ -15,7 +13,6 @@ const adminController = {
         });
       }
 
-      // Вставляем новый товар в БД
       const result = await pool.query(
         `INSERT INTO menu_items 
          (category_id, name, description, price, image_url) 
@@ -39,11 +36,8 @@ const adminController = {
     }
   },
 
-  // ==================== READ ====================
-  // Получить все товары (для админки)
   async getAllItems(req, res) {
     try {
-      // Получаем ВСЕ товары, включая неактивные
       const result = await pool.query(`
         SELECT 
           m.*, 
@@ -72,8 +66,6 @@ const adminController = {
     }
   },
 
-  // ==================== READ (ONE) ====================
-  // Получить один товар по ID
   async getItemById(req, res) {
     try {
       const { id } = req.params;
@@ -107,7 +99,6 @@ const adminController = {
     }
   },
 
-  // ==================== UPDATE ====================
   // Обновить товар
   async updateItem(req, res) {
   try {
@@ -115,7 +106,6 @@ const adminController = {
     const { id } = req.params;
     const { category_id, name, description, price, image_url, is_active } = req.body;
 
-    // 1. Проверяем, что товар существует
     const itemExists = await pool.query(
       'SELECT id, name FROM menu_items WHERE id = $1',
       [id]
@@ -130,20 +120,15 @@ const adminController = {
 
     console.log(`📦 Товар найден: ${itemExists.rows[0].name}`);
 
-    // 2. Подготавливаем данные для обновления
-    // Преобразуем price в число, если он пришёл
     const priceValue = price !== undefined ? parseFloat(price) : undefined;
     
-    // Преобразуем category_id в число, если он пришёл
     const categoryIdValue = category_id !== undefined ? parseInt(category_id) : undefined;
     
-    // Преобразуем is_active в boolean
     let isActiveValue = undefined;
     if (is_active !== undefined) {
       isActiveValue = is_active === true || is_active === 'true' || is_active === 1;
     }
 
-    // 3. Выполняем обновление с COALESCE
     const result = await pool.query(
       `UPDATE menu_items 
        SET 
@@ -179,7 +164,6 @@ const adminController = {
     console.error('❌ Ошибка обновления товара:', err.message);
     console.error('📋 Детали ошибки:', err);
     
-    // Определяем тип ошибки для пользователя
     let userMessage = 'Ошибка при обновлении товара';
     if (err.code === '23503') {
       userMessage = 'Ошибка: указана несуществующая категория (category_id)';
@@ -195,13 +179,11 @@ const adminController = {
   }
 },
 
-  // ==================== DELETE (SOFT) ====================
-  // "Мягкое" удаление - меняем статус is_active на false
+  // удаление
   async deleteItem(req, res) {
     try {
       const { id } = req.params;
 
-      // Проверяем, существует ли товар
       const itemExists = await pool.query(
         'SELECT id, name FROM menu_items WHERE id = $1',
         [id]
@@ -214,7 +196,6 @@ const adminController = {
         });
       }
 
-      // Меняем статус на неактивный
       await pool.query(
         'UPDATE menu_items SET is_active = false WHERE id = $1',
         [id]
@@ -234,8 +215,7 @@ const adminController = {
     }
   },
 
-  // ==================== ВСПОМОГАТЕЛЬНЫЕ ====================
-  // Получить все категории (для выпадающего списка)
+  // Получить все категории
   async getCategories(req, res) {
     try {
       const result = await pool.query(
@@ -256,7 +236,7 @@ const adminController = {
     }
   },
 
-  // Получить статистику (количество товаров по категориям)
+  //количество товаров по категориям
   async getStats(req, res) {
     try {
       const result = await pool.query(`
@@ -290,7 +270,6 @@ async searchItems(req, res) {
     console.log('📝 Параметры запроса:', req.query);
     console.log('🔑 Пользователь:', req.user);
     
-    // Получаем поисковый запрос
     const { q } = req.query;
     const searchTerm = (q || '').trim();
     
@@ -306,7 +285,6 @@ async searchItems(req, res) {
       });
     }
 
-    // ✅ УПРОЩЕННЫЙ и РАБОЧИЙ запрос
     const result = await pool.query(`
       SELECT 
         m.id,
@@ -327,7 +305,6 @@ async searchItems(req, res) {
 
     console.log(`✅ [СЕРВЕР] Найдено: ${result.rows.length} товаров`);
     
-    // Логируем найденные товары для отладки
     result.rows.forEach((item, index) => {
       console.log(`  ${index + 1}. ${item.name} - ${item.price} ₽`);
     });
@@ -345,7 +322,6 @@ async searchItems(req, res) {
     console.error('Код ошибки:', err.code);
     console.error('Стек ошибки:', err.stack);
     
-    // ✅ Если ошибка в JOIN, убираем его временно
     if (err.code === '42703' || err.message.includes('column')) {
       console.log('🔄 Пробуем упрощенный запрос без JOIN...');
       
@@ -387,7 +363,7 @@ async searchItems(req, res) {
   }
 },
 
-// Восстановить товар (из неактивного в активный)
+// Восстановить товар
 async restoreItem(req, res) {
   try {
     const { id } = req.params;

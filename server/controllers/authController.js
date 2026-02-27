@@ -8,7 +8,6 @@ const authController = {
     try {
       const { email, password } = req.body;
 
-      // Проверяем, существует ли пользователь
       const userExists = await pool.query(
         'SELECT id FROM users WHERE email = $1',
         [email]
@@ -21,10 +20,8 @@ const authController = {
         });
       }
 
-      // Хешируем пароль
       const password_hash = await bcrypt.hash(password, 10);
 
-      // Сохраняем пользователя
       const newUser = await pool.query(
         `INSERT INTO users (email, password_hash) 
          VALUES ($1, $2) 
@@ -52,7 +49,6 @@ const authController = {
     try {
       const { email, password } = req.body;
 
-      // Ищем пользователя
       const result = await pool.query(
         'SELECT * FROM users WHERE email = $1',
         [email]
@@ -60,7 +56,6 @@ const authController = {
 
       const user = result.rows[0];
 
-      // Проверяем, существует ли пользователь
       if (!user) {
         return res.status(401).json({
           success: false,
@@ -68,7 +63,6 @@ const authController = {
         });
       }
 
-      // Проверяем пароль
       const isPasswordValid = await bcrypt.compare(password, user.password_hash);
       
       if (!isPasswordValid) {
@@ -78,7 +72,6 @@ const authController = {
         });
       }
 
-      // Создаём JWT токен
       const token = jwt.sign(
         {
           id: user.id,
@@ -89,7 +82,6 @@ const authController = {
         { expiresIn: '24h' }
       );
 
-      // Отправляем успешный ответ
       res.json({
         success: true,
         message: 'Авторизация успешна',

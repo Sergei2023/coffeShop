@@ -1,4 +1,3 @@
-/* Главные стили админки */
 :root {
     --mahogany: #32160e;
     --sunburst: #efb489;
@@ -1218,7 +1217,6 @@ ul {
   }
 }
 
-/* Футер убираем для админки */
 .admin-header + .site-footer {
   display: none;
 }

@@ -20,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // ===== ВХОД =====
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
     
@@ -43,13 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if (response.ok) {
-                // Сохраняем данные пользователя
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('authUser', JSON.stringify(data.user));
                 
                 showMessage(loginMessage, '✅ Вход успешен!', 'success');
                 
-                // Получаем returnTo из URL или localStorage
                 const urlParams = new URLSearchParams(window.location.search);
                 const returnToParam = urlParams.get('returnTo');
                 const savedReturnUrl = localStorage.getItem('returnUrl');
@@ -65,14 +62,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 console.log('Перенаправление после логина на:', returnTo);
                 
-                // Перенаправляем через 1 секунду
                 setTimeout(() => {
-                    // Обновляем кнопки на всех страницах
                     if (window.auth && window.auth.updateAuthButtons) {
                         window.auth.updateAuthButtons();
                     }
                     
-                    // Перенаправляем на нужную страницу
                     window.location.href = returnTo;
                 }, 1000);
                 
@@ -85,7 +79,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // ===== РЕГИСТРАЦИЯ =====
     const registerForm = document.getElementById('registerForm');
     const registerMessage = document.getElementById('registerMessage');
     
@@ -96,7 +89,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const password = document.getElementById('registerPassword').value;
         const confirmPassword = document.getElementById('registerConfirm').value;
         
-        // Проверка паролей
         if (password !== confirmPassword) {
             showMessage(registerMessage, '❌ Пароли не совпадают', 'error');
             return;
@@ -120,13 +112,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             
             if (response.ok) {
-                // Автоматически входим после регистрации
                 localStorage.setItem('authToken', data.token);
                 localStorage.setItem('authUser', JSON.stringify(data.user));
                 
                 showMessage(registerMessage, '✅ Регистрация успешна! Входим...', 'success');
                 
-                // Аналоично для регистрации
                 const urlParams = new URLSearchParams(window.location.search);
                 const returnToParam = urlParams.get('returnTo');
                 const savedReturnUrl = localStorage.getItem('returnUrl');
@@ -140,9 +130,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 localStorage.removeItem('returnUrl');
                 
-                // Перенаправляем через 1.5 секунды
                 setTimeout(() => {
-                    // Обновляем кнопки
                     if (window.auth && window.auth.updateAuthButtons) {
                         window.auth.updateAuthButtons();
                     }
@@ -159,7 +147,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
-    // Вспомогательная функция
     function showMessage(element, text, type) {
         element.textContent = text;
         element.className = 'auth-message';
