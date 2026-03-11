@@ -23,19 +23,23 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:3000',
-    'https://coffeshop.onrender.com',
-    'https://sergei2022.github.io'
+    'https://coffee-shop.onrender.com',
+    'https://sergei2023.github.io'
 ];
 
 app.use(cors({
     origin: function(origin, callback) {
         if (!origin) return callback(null, true);
         
-        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+        if (process.env.NODE_ENV !== 'production') {
+            return callback(null, true);
+        }
+        
+        if (allowedOrigins.indexOf(origin) !== -1) {
             callback(null, true);
         } else {
             console.log('❌ Заблокирован origin:', origin);
-            callback(new Error('Not allowed by CORS'));
+            callback(new Error('CORS не разрешен'));
         }
     },
     credentials: true,
@@ -76,6 +80,7 @@ app.get('/api/test', (req, res) => {
     res.json({ 
         success: true, 
         message: 'API работает',
+        env: process.env.NODE_ENV,
         timestamp: new Date().toISOString()
     });
 });
@@ -84,28 +89,52 @@ app.use(express.static(clientPath));
 app.use('/images', express.static(path.join(clientPath, 'public/images')));
 app.use('/admin', express.static(adminPath));
 
-app.get('*', (req, res) => {
-    if (req.url.startsWith('/api/')) {
+app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
         return res.status(404).json({ error: 'API route not found' });
     }
     
-    const htmlPath = path.join(clientPath, 'index.html');
-    if (fs.existsSync(htmlPath)) {
-        res.sendFile(htmlPath);
-    } else {
-        res.status(404).send('File not found');
+    let htmlPath = path.join(clientPath, req.path);
+    
+    if (req.path.endsWith('/')) {
+        htmlPath = path.join(htmlPath, 'index.html');
     }
+    else if (!path.extname(req.path)) {
+        const htmlPathWithExt = htmlPath + '.html';
+        if (fs.existsSync(htmlPathWithExt)) {
+            return res.sendFile(htmlPathWithExt);
+        }
+    }
+    
+    if (fs.existsSync(htmlPath) && fs.statSync(htmlPath).isFile()) {
+        return res.sendFile(htmlPath);
+    }
+    
+    const indexPath = path.join(clientPath, 'index.html');
+    if (fs.existsSync(indexPath)) {
+        return res.sendFile(indexPath);
+    }
+    
+    const menuPath = path.join(clientPath, 'menu.html');
+    if (fs.existsSync(menuPath)) {
+        return res.sendFile(menuPath);
+    }
+    
+    res.status(404).send('Файл не найден');
 });
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log('='.repeat(60));
-    console.log(`СЕРВЕР ЗАПУЩЕН НА ПОРТУ: ${PORT}`);
-    console.log(`Режим: ${process.env.NODE_ENV || 'development'}`);
+    console.log(`🚀 СЕРВЕР ЗАПУЩЕН`);
+    console.log(`📌 Порт: ${PORT}`);
+    console.log(`🌍 Режим: ${process.env.NODE_ENV || 'development'}`);
     console.log('='.repeat(60));
-    console.log('Маршруты API:');
-    console.log(`   API меню:    /api/menu`);
-    console.log(`   API логин:   POST /api/auth/login`);
-    console.log(`   API корзина: /api/cart`);
+    console.log('📡 API маршруты:');
+    console.log(`   GET  /api/test`);
+    console.log(`   GET  /api/menu`);
+    console.log(`   POST /api/auth/login`);
+    console.log(`   POST /api/auth/register`);
+    console.log(`   GET  /api/cart`);
     console.log('='.repeat(60));
 });
