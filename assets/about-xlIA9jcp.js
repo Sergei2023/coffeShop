@@ -1,0 +1,1 @@
+import"./modulepreload-polyfill-B5Qt9EMX.js";/* empty css              */document.addEventListener("DOMContentLoaded",function(){document.querySelectorAll(".stat-number").forEach(t=>{const e=t.getAttribute("data-count");t.nextElementSibling.textContent.includes("миллион")?t.textContent=e+"M":t.textContent=e})});
