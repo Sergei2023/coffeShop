@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// Обновление кнопок авторизации
 function updateAuthButtons() {
     const authButtonsContainer = document.getElementById('authButtons');
     if (!authButtonsContainer) return;
@@ -39,7 +38,7 @@ function updateAuthButtons() {
         
         if (user.role === 'admin') {
             const adminBtn = document.createElement('a');
-            adminBtn.href = '/admin/admin.html';
+            adminBtn.href = '/coffeShop/admin/admin.html';
             adminBtn.className = 'auth-button auth-button--admin';
             adminBtn.textContent = 'АРМ администратора';
             authButtonsContainer.appendChild(adminBtn);
@@ -53,7 +52,7 @@ function updateAuthButtons() {
         
     } else {
         const loginBtn = document.createElement('a');
-        loginBtn.href = '/login.html';
+        loginBtn.href = '/coffeShop/login.html';
         loginBtn.className = 'auth-button auth-button--login';
         loginBtn.textContent = 'Войти';
         authButtonsContainer.appendChild(loginBtn);
