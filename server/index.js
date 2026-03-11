@@ -23,7 +23,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
     'http://localhost:3000',
-    'https://coffee-shop.onrender.com',
+    'https://coffeshop-onbx.onrender.com',
     'https://sergei2023.github.io'
 ];
 
