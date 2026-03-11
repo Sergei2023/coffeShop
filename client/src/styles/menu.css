@@ -150,6 +150,21 @@
   box-shadow: 0 4px 12px rgba(107, 39, 13, 0.3);
 }
 
+.menu-card__btn.added {
+    background-color: #4CAF50;
+    pointer-events: none;
+}
+
+.menu-card__btn.error {
+    background-color: #f44336;
+    pointer-events: none;
+}
+
+.menu-card__btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
 /* вдруг товара нет */
 .menu-empty {
   grid-column: 1 / -1;
