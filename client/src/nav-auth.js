@@ -52,7 +52,7 @@ function updateAuthButtons() {
         
     } else {
         const loginBtn = document.createElement('a');
-        loginBtn.href = '/login.html';
+        loginBtn.href = 'login.html';
         loginBtn.className = 'auth-button auth-button--login';
         loginBtn.textContent = 'Войти';
         authButtonsContainer.appendChild(loginBtn);
@@ -113,7 +113,7 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-function requireAuth(redirectTo = '/login.html') {
+function requireAuth(redirectTo = 'login.html') {
     const token = localStorage.getItem('authToken');
     if (!token) {
         localStorage.setItem('returnUrl', window.location.href);

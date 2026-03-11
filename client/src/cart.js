@@ -103,7 +103,7 @@ async function updateQuantity(itemId, change) {
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/login.html';
+            window.location.href = 'login.html';
             return;
         }
         
@@ -135,7 +135,7 @@ async function removeFromCart(itemId) {
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/login.html';
+            window.location.href = 'login.html';
             return;
         }
         
@@ -168,7 +168,7 @@ async function clearCart() {
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/login.html';
+            window.location.href = 'login.html';
             return;
         }
         

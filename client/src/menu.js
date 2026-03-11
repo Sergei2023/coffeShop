@@ -51,7 +51,6 @@ function renderMenu(items) {
         </div>
     `).join('');
 
-    // Добавляем обработчики на кнопки
     document.querySelectorAll('.menu-card__btn').forEach(button => {
         button.addEventListener('click', async (e) => {
             const productId = e.target.dataset.productId;
@@ -61,7 +60,7 @@ function renderMenu(items) {
             
             if (!token || !user) {
                 const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-                window.location.href = `/login.html?returnUrl=${returnUrl}`;
+                window.location.href = `login.html?returnUrl=${returnUrl}`;
                 return;
             }
             
@@ -82,16 +81,14 @@ function renderMenu(items) {
                 if (response.status === 401 || response.status === 403) {
                     localStorage.removeItem('authToken');
                     localStorage.removeItem('authUser');
-                    window.location.href = '/login.html';
+                    window.location.href = 'login.html';
                     return;
                 }
                 
                 if (response.ok) {
-                    // Обновляем счетчик корзины
                     if (window.updateCartCount) {
                         window.updateCartCount();
                     } else {
-                        // Альтернативный способ обновления счетчика
                         const cartCountElement = document.getElementById('cartCount');
                         if (cartCountElement) {
                             const currentCount = parseInt(cartCountElement.textContent) || 0;
