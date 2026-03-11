@@ -1,6 +1,3 @@
-import './styles/style.css';
-import './styles/about.css';
-
 document.addEventListener('DOMContentLoaded', function() {
     const statNumbers = document.querySelectorAll('.stat-number');
     

@@ -1,6 +1,3 @@
-import './styles/style.css';
-import './styles/menu.css';
-
 async function loadMenuFromAPI() {
     try {
         const response = await fetch('/api/menu');
