@@ -114,11 +114,24 @@ app.get('/contact', (req, res) => {
     res.sendFile(path.join(clientPath, 'contact.html'));
 });
 
-app.get('*', (req, res) => {
-    if (req.url.startsWith('/api/')) {
-        return res.status(404).json({ error: 'API route not found' });
+app.use((req, res, next) => {
+    if (req.path.startsWith('/api')) {
+        return next();
     }
-    res.sendFile(path.join(clientPath, 'index.html'));
+
+    const possiblePaths = [
+        path.join(clientPath, req.path),
+        path.join(clientPath, req.path + '.html'),
+        path.join(clientPath, 'index.html')
+    ];
+
+    for (const filePath of possiblePaths) {
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+            return res.sendFile(filePath);
+        }
+    }
+
+    res.status(404).send('Страница не найдена');
 });
 
 app.use((req, res, next) => {
