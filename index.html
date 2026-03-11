@@ -1,32 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Coffейня</title>
-  <script type="module" crossorigin src="/coffeShop/assets/index-DYhyMp9A.js"></script>
-  <link rel="stylesheet" crossorigin href="/coffeShop/assets/index-DJ8PjQGM.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>главная</title>
+  <script type="module" crossorigin src="/assets/index-Dm5l2AqS.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-Dv_g65Rn.css">
 </head>
 <body>
 <header class="site-header">
     <div class="container site-header__inner">
-        <a href="/coffeShop/" class="logo">Coffейня</a>
-
+        <a href="/" class="logo">Coffейня</a>
         <nav class="main-nav" aria-label="Основная навигация">
             <ul class="main-nav__list">
-                <li class="main-nav__item"><a class="main-nav__link" href="#">Главная</a></li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/">Главная</a>
+                </li>
                 <li class="main-nav__separator">•</li>
-                <li class="main-nav__item"><a class="main-nav__link" href="./menu.html">Меню</a></li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/menu.html">Меню</a>
+                </li>
                 <li class="main-nav__separator">•</li>
-                <li class="main-nav__item"><a class="main-nav__link" href="#">О нас</a></li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/about.html">О нас</a>
+                </li>
                 <li class="main-nav__separator">•</li>
-                <li class="main-nav__item"><a class="main-nav__link" href="#">Контакты</a></li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/contact.html">Контакты</a>
+                </li>
+                <li class="main-nav__separator">•</li>
+                <li class="main-nav__item">
+                    <a class="main-nav__link" href="/cart.html" id="cartNavLink">
+                         Корзина <span id="cartCount">0</span>
+                    </a>
+                </li>
             </ul>
         </nav>
-
-        <button class="button button--text site-header__order-button" type="button">
-            Сделать заказ
-        </button>
+        <div class="auth-buttons" id="authButtons"></div>
     </div>
 </header>
 
@@ -42,7 +52,7 @@
             </div>
 
             <button class="button button--primary hero__delivery-button" type="button">
-                Заказать доставку
+                <a href="./menu.html">Перейти в меню</a>
             </button>
 
             <div class="hero-info">
@@ -126,35 +136,45 @@
         <section class="site-footer__column">
             <h2 class="site-footer__title">Документы</h2>
             <div class="site-footer__block">
-                <a href="/privacy.html" class="site-footer__link">Политика конфиденциальности</a>
-                <a href="/payment.html" class="site-footer__link">Условия оплаты и возврата</a>
-                <a href="/delivery.html" class="site-footer__link">Условия доставки</a>
+                <a href="privacy.html" class="site-footer__link">Политика конфиденциальности</a>
+                <a href="payment.html" class="site-footer__link">Условия оплаты и возврата</a>
+                <a href="delivery.html" class="site-footer__link">Пользовательское соглашение</a>
             </div>
         </section>
 
         <section class="site-footer__column">
-            <h2 class="site-footer__title">Социальные сети</h2>
-            <div class="site-footer__block">
-                <p>Instagram:
-                    <a href="https://instagram.com/instagram123" target="_blank" class="site-footer__link">
-                        instagram123
-                    </a>
-                </p>
-                <p>Facebook:
-                    <a href="https://facebook.com/facebook123" target="_blank" class="site-footer__link">
-                        facebook123
-                    </a>
-                </p>
-                <p>VK:
-                    <a href="https://vk.com/vk123" target="_blank" class="site-footer__link">
-                        vk123
-                    </a>
-                </p>
-            </div>
-        </section>
+        <h2 class="site-footer__title">Социальные сети</h2>
+        <div class="site-footer__block">
+          <p>
+            Instagram:
+            <a href="https://instagram.com/instagram123" target="_blank" class="site-footer__link">
+              instagram123
+            </a>
+          </p>
+          <p>
+            Facebook:
+            <a href="https://facebook.com/facebook123" target="_blank" class="site-footer__link">
+              facebook123
+            </a>
+          </p>
+          <p>
+            Telegram
+            <a href="https://web.telegram.org/@Nekhlebov_1553" target="_blank" class="site-footer__link">
+              Nekhlebov_1553
+            </a>
+          </p>
+          <p>
+            VK:
+            <a href="https://vk.com/belorus47475863647" target="_blank" class="site-footer__link">
+              belorus47475863647
+            </a>
+          </p>
+        </div>
+      </section>
     </div>
 </footer>
 
 <div id="app"></div>
+<script src="src/nav-auth.js"></script>
 </body>
 </html>
