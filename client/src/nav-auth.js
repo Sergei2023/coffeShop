@@ -38,7 +38,7 @@ function updateAuthButtons() {
         
         if (user.role === 'admin') {
             const adminBtn = document.createElement('a');
-            adminBtn.href = '/coffeShop/admin/admin.html';
+            adminBtn.href = '/admin/admin.html';
             adminBtn.className = 'auth-button auth-button--admin';
             adminBtn.textContent = 'АРМ администратора';
             authButtonsContainer.appendChild(adminBtn);
