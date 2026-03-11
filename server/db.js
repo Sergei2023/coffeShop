@@ -8,6 +8,8 @@ const pool = new Pool({
   database: 'coffeshop',
   password: process.env.DB_PASSWORD,
   port: 5432,  
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false
 });
+
 
 export default pool;

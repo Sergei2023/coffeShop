@@ -3,7 +3,7 @@ import './styles/menu.css';
 
 async function loadMenuFromAPI() {
     try {
-        const response = await fetch('http://localhost:3000/api/menu');
+        const response = await fetch('/api/menu');
         if (!response.ok) throw new Error('Ошибка сети');
         const data = await response.json();
         
@@ -64,12 +64,12 @@ function renderMenu(items) {
             
             if (!token || !user) {
                 const returnUrl = encodeURIComponent(window.location.pathname + window.location.search);
-                window.location.href = `/coffeShop/login.html?returnUrl=${returnUrl}`;
+                window.location.href = `/login.html?returnUrl=${returnUrl}`;
                 return;
             }
             
             try {
-                const response = await fetch('http://localhost:3000/api/cart/add', {
+                const response = await fetch('/api/cart/add', {
                     method: 'POST',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -85,7 +85,7 @@ function renderMenu(items) {
                 if (response.status === 401 || response.status === 403) {
                     localStorage.removeItem('authToken');
                     localStorage.removeItem('authUser');
-                    window.location.href = '/coffeShop/login.html';
+                    window.location.href = '/login.html';
                     return;
                 }
                 

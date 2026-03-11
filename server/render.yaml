@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: coffee-shop-api
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_USER
+        fromDatabase:
+          name: coffee-shop-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: coffee-shop-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: coffee-shop-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: coffee-shop-db
+          property: port
+      - key: DB_NAME
+        fromDatabase:
+          name: coffee-shop-db
+          property: database
+      - key: JWT_SECRET
+        generateValue: true
+
+databases:
+  - name: coffee-shop-db
+    plan: free
+    databaseName: coffeshop
+    user: postgres

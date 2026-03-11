@@ -39,7 +39,7 @@ function updateAuthButtons() {
         
         if (user.role === 'admin') {
             const adminBtn = document.createElement('a');
-            adminBtn.href = '/coffeShop/admin/admin.html';
+            adminBtn.href = '/admin/admin.html';
             adminBtn.className = 'auth-button auth-button--admin';
             adminBtn.textContent = 'АРМ администратора';
             authButtonsContainer.appendChild(adminBtn);
@@ -53,7 +53,7 @@ function updateAuthButtons() {
         
     } else {
         const loginBtn = document.createElement('a');
-        loginBtn.href = '/coffeShop/login.html';
+        loginBtn.href = '/login.html';
         loginBtn.className = 'auth-button auth-button--login';
         loginBtn.textContent = 'Войти';
         authButtonsContainer.appendChild(loginBtn);
@@ -70,7 +70,7 @@ function logout() {
         
         setTimeout(() => {
             updateAuthButtons();
-            window.location.href = '/coffeShop/';
+            window.location.href = '/';
         }, 1000);
     }
 }
@@ -114,7 +114,7 @@ function showToast(message, type = 'success') {
     }, 3000);
 }
 
-function requireAuth(redirectTo = '/coffeShop/login.html') {
+function requireAuth(redirectTo = '/login.html') {
     const token = localStorage.getItem('authToken');
     if (!token) {
         localStorage.setItem('returnUrl', window.location.href);
@@ -155,7 +155,7 @@ async function updateCartCounter() {
     }
     
     try {
-        const response = await fetch('http://localhost:3000/api/cart', {
+        const response = await fetch('/api/cart', {
             headers: { 'Authorization': `Bearer ${token}` }
         });
         
@@ -176,7 +176,7 @@ function logout() {
         localStorage.removeItem('authUser');
         updateAuthButtons();
         updateCartCounter();
-        window.location.href = '/coffeShop/';
+        window.location.href = '/';
     }
 }
 

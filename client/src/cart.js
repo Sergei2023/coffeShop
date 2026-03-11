@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000';
+const API_BASE = '';
 
 function updateCartCount(count = null) {
     const cartCountElement = document.getElementById('cartCount');
@@ -88,12 +88,12 @@ function updateSummary(total, count) {
 async function updateQuantity(itemId, change) {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/api/cart/${itemId}`, {
+        const response = await fetch(`/api/cart/${itemId}`, {
             method: 'PUT',
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
-                'Origin': 'http://localhost:5174'
+                // 'Origin': 'http://localhost:5174'
             },
             body: JSON.stringify({
                 quantity: change > 0 ? 'increase' : 'decrease'
@@ -103,7 +103,7 @@ async function updateQuantity(itemId, change) {
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/coffeShop/login.html';
+            window.location.href = '/login.html';
             return;
         }
         
@@ -124,18 +124,18 @@ async function removeFromCart(itemId) {
     
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/api/cart/${itemId}`, {
+        const response = await fetch(`/api/cart/${itemId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Origin': 'http://localhost:5174'
+                // 'Origin': 'http://localhost:5174'
             }
         });
         
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/coffeShop/login.html';
+            window.location.href = '/login.html';
             return;
         }
         
@@ -157,18 +157,18 @@ async function clearCart() {
     
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/api/cart`, {
+        const response = await fetch(`/api/cart`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`,
-                'Origin': 'http://localhost:5174'
+                // 'Origin': 'http://localhost:5174'
             }
         });
         
         if (response.status === 401 || response.status === 403) {
             localStorage.removeItem('authToken');
             localStorage.removeItem('authUser');
-            window.location.href = '/coffeShop/login.html';
+            window.location.href = '/login.html';
             return;
         }
         
@@ -193,7 +193,7 @@ async function checkout() {
     /*
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/api/orders`, {
+        const response = await fetch(`/api/orders`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${token}`,
@@ -247,10 +247,10 @@ async function checkAuthAndLoadCart() {
     }
     
     try {
-        const response = await fetch(`${API_BASE}/api/cart`, {
+        const response = await fetch(`/api/cart`, {
             headers: { 
                 'Authorization': `Bearer ${token}`,
-                'Origin': 'http://localhost:5174'
+                // 'Origin': 'http://localhost:5174'
             }
         });
         
@@ -286,10 +286,10 @@ async function checkAuthAndLoadCart() {
 async function loadCart() {
     try {
         const token = localStorage.getItem('authToken');
-        const response = await fetch(`${API_BASE}/api/cart`, {
+        const response = await fetch(`/api/cart`, {
             headers: { 
                 'Authorization': `Bearer ${token}`,
-                'Origin': 'http://localhost:5174'
+                // 'Origin': 'http://localhost:5174'
             }
         });
         

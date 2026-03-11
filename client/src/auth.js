@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000';
+const API_BASE = '';
 
 document.addEventListener('DOMContentLoaded', function() {
     const tabs = document.querySelectorAll('.auth-tab');

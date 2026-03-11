@@ -13,28 +13,44 @@ const app = express();
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Пути
 const clientPath = path.join(__dirname, '../client');
 const adminPath = path.join(clientPath, 'admin');
 
 console.log('📁 Пути проверены:');
 console.log('Админка:', fs.existsSync(adminPath) ? '✅ найдена' : '❌ не найдена');
 
+const allowedOrigins = [
+    'http://localhost:5173',
+    'http://localhost:5174',
+    'http://localhost:3000',
+    'https://coffeshop.onrender.com',
+    'https://sergei2022.github.io'
+];
+
 app.use(cors({
-    origin: ['http://localhost:5173', 'http://localhost:5174', 'http://localhost:3000'],
+    origin: function(origin, callback) {
+        if (!origin) return callback(null, true);
+        
+        if (allowedOrigins.indexOf(origin) !== -1 || process.env.NODE_ENV !== 'production') {
+            callback(null, true);
+        } else {
+            console.log('❌ Заблокирован origin:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization', 'Origin', 'X-Requested-With', 'Accept']
+    allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
 app.use(express.json());
-app.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
-    if (req.method === 'POST' || req.method === 'PUT') {
-        console.log('Body:', req.body);
-    }
-    next();
-});
+
+if (process.env.NODE_ENV !== 'production') {
+    app.use((req, res, next) => {
+        console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
+        next();
+    });
+}
 
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
@@ -65,49 +81,31 @@ app.get('/api/test', (req, res) => {
 });
 
 app.use(express.static(clientPath));
-
 app.use('/images', express.static(path.join(clientPath, 'public/images')));
+app.use('/admin', express.static(adminPath));
 
-app.get('/admin', (req, res) => {
-    const adminHtml = path.join(adminPath, 'admin.html');
-    if (fs.existsSync(adminHtml)) {
-        res.sendFile(adminHtml);
+app.get('*', (req, res) => {
+    if (req.url.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API route not found' });
+    }
+    
+    const htmlPath = path.join(clientPath, 'index.html');
+    if (fs.existsSync(htmlPath)) {
+        res.sendFile(htmlPath);
     } else {
-        res.status(404).send('Админка не настроена');
+        res.status(404).send('File not found');
     }
 });
 
-app.use('/admin', express.static(adminPath, {
-    setHeaders: (res, path) => {
-        if (path.endsWith('.js')) {
-            res.setHeader('Content-Type', 'application/javascript');
-        }
-        if (path.endsWith('.css')) {
-            res.setHeader('Content-Type', 'text/css');
-        }
-    }
-}));
-
-app.post('/api/test-post', (req, res) => {
-    console.log('Test POST received:', req.body);
-    res.json({ 
-        success: true, 
-        message: 'POST работает',
-        received: req.body
-    });
-});
-
-const PORT = 3000;
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, '0.0.0.0', () => {
     console.log('='.repeat(60));
-    console.log(`СЕРВЕР ЗАПУЩЕН: http://localhost:${PORT}`);
+    console.log(`СЕРВЕР ЗАПУЩЕН НА ПОРТУ: ${PORT}`);
+    console.log(`Режим: ${process.env.NODE_ENV || 'development'}`);
     console.log('='.repeat(60));
-    console.log('Ключевые маршруты:');
-    console.log(`   Главная:     http://localhost:${PORT}/`);
-    console.log(`   Админка:     http://localhost:${PORT}/admin`);
-    console.log(`   API меню:    http://localhost:${PORT}/api/menu`);
-    console.log(`   API логин:   POST http://localhost:${PORT}/api/auth/login`);
-    console.log(`   API тест:    GET http://localhost:${PORT}/api/test`);
-    console.log(`   API тест POST: POST http://localhost:${PORT}/api/test-post`);
+    console.log('Маршруты API:');
+    console.log(`   API меню:    /api/menu`);
+    console.log(`   API логин:   POST /api/auth/login`);
+    console.log(`   API корзина: /api/cart`);
     console.log('='.repeat(60));
 });
