@@ -85,9 +85,41 @@ app.get('/api/test', (req, res) => {
     });
 });
 
-app.use(express.static(clientPath));
+app.use('/src', express.static(path.join(clientPath, 'src')));
+app.use('/public', express.static(path.join(clientPath, 'public')));
 app.use('/images', express.static(path.join(clientPath, 'public/images')));
 app.use('/admin', express.static(adminPath));
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(clientPath, 'index.html'));
+});
+
+app.get('/menu', (req, res) => {
+    res.sendFile(path.join(clientPath, 'menu.html'));
+});
+
+app.get('/cart', (req, res) => {
+    res.sendFile(path.join(clientPath, 'cart.html'));
+});
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(clientPath, 'login.html'));
+});
+
+app.get('/about', (req, res) => {
+    res.sendFile(path.join(clientPath, 'about.html'));
+});
+
+app.get('/contact', (req, res) => {
+    res.sendFile(path.join(clientPath, 'contact.html'));
+});
+
+app.get('*', (req, res) => {
+    if (req.url.startsWith('/api/')) {
+        return res.status(404).json({ error: 'API route not found' });
+    }
+    res.sendFile(path.join(clientPath, 'index.html'));
+});
 
 app.use((req, res, next) => {
     if (req.path.startsWith('/api')) {
