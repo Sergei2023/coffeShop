@@ -52,7 +52,7 @@ function updateAuthButtons() {
         
     } else {
         const loginBtn = document.createElement('a');
-        loginBtn.href = '/coffeShop/login.html';
+        loginBtn.href = '/login.html';
         loginBtn.className = 'auth-button auth-button--login';
         loginBtn.textContent = 'Войти';
         authButtonsContainer.appendChild(loginBtn);
