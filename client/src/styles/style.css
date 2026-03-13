@@ -24,6 +24,7 @@ body {
     background-color: #ffffff;
     color: var(--mahogany);
     padding-top: 80px;
+    font-family: cursive;
 }
 
 a {

@@ -19,7 +19,7 @@
 }
 
 .agreement-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 300;
   font-size: 36px;
   line-height: 1.3;
@@ -29,7 +29,7 @@
 }
 
 .agreement-subtitle {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 300;
   font-size: 18px;
   color: var(--cinnamon);
@@ -99,7 +99,7 @@
 }
 
 .section-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 26px;
   line-height: 1.4;
@@ -141,7 +141,7 @@
 }
 
 .definition-term {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 18px;
   color: var(--cinnamon);
@@ -168,7 +168,7 @@
 }
 
 .clause-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 20px;
   color: var(--cognac);
@@ -229,7 +229,7 @@
 }
 
 .req-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 17px;
   color: var(--cinnamon);
@@ -268,7 +268,7 @@
 }
 
 .step-number {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 700;
   font-size: 28px;
   color: var(--caramel);
@@ -276,7 +276,7 @@
 }
 
 .step-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 18px;
   color: var(--cognac);
@@ -301,7 +301,7 @@
 }
 
 .note-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 18px;
   color: var(--cinnamon);
@@ -328,7 +328,7 @@
 }
 
 .column-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 20px;
   color: var(--cognac);
@@ -385,7 +385,7 @@
 }
 
 .liability-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 18px;
   color: var(--cinnamon);
@@ -420,7 +420,7 @@
 }
 
 .copyright-notice p {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 300;
   font-size: 16px;
   color: var(--cinnamon);
@@ -443,7 +443,7 @@
 }
 
 .dispute-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 18px;
   color: var(--cinnamon);
@@ -470,7 +470,7 @@
 }
 
 .final-title {
-  font-family: 'Inria Serif', serif;
+  /* font-family: 'Inria Serif', serif; */
   font-weight: 400;
   font-size: 24px;
   color: var(--cognac);

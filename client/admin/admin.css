@@ -24,6 +24,7 @@ body {
     background-color: #ffffff;
     color: var(--mahogany);
     padding-top: 80px;
+    font-family: cursive;
 }
 
 a {
@@ -38,7 +39,7 @@ ul {
 .container {
     max-width: 1440px;
     margin: 0 auto;
-    padding: 0 60px;
+    /* padding: 0 60px; */
 }
 
 /* Шапка */
@@ -137,7 +138,7 @@ ul {
     border: none;
     background: transparent;
     cursor: pointer;
-    font-family: inherit;
+    /* font-family: inherit; */
     letter-spacing: 1px;
     transition: all 0.3s ease;
 }
@@ -1012,7 +1013,7 @@ ul {
   color: var(--mahogany);
   background: #fcfaf7;
   transition: all 0.3s ease;
-  font-family: inherit;
+  /* font-family: inherit; */
 }
 
 .modal__textarea {

@@ -85,7 +85,6 @@
 }
 
 .about__text {
-    font-family: 'Inria Serif', serif;
     font-weight: 300;
     font-size: 28px;
     line-height: 34px;
@@ -112,7 +111,7 @@
 }
 
 .features__item {
-    font-family: 'Inria Serif', serif;
+    /* font-family: 'Inria Serif', serif; */
     font-weight: 300;
     font-size: 28px;
     line-height: 34px;
@@ -149,7 +148,7 @@
 }
 
 .site-footer__title {
-    font-family: 'Inria Serif', serif;
+    /* font-family: 'Inria Serif', serif; */
     font-weight: 400;
     font-size: 16px;
     line-height: 20px;
@@ -167,7 +166,7 @@
 }
 
 .site-footer__block p {
-    font-family: 'Inria Serif', serif;
+    /* font-family: 'Inria Serif', serif; */
     font-weight: 300;
     font-size: 15px;
     line-height: 16px;
@@ -179,7 +178,7 @@
 .site-footer__link {
     position: relative;
     display: inline-block;
-    font-family: 'Inria Serif', serif;
+    /* font-family: 'Inria Serif', serif; */
     font-weight: 300;
     font-size: 15px;
     line-height: 18px;
