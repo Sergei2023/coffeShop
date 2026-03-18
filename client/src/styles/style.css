@@ -257,6 +257,7 @@ ul {
     border-radius: 20px;
     font-weight: 600;
     font-size: 14px;
+    font-family: cursive;
     cursor: pointer;
     transition: all 0.3s;
     border: 2px solid transparent;

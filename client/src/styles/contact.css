@@ -75,7 +75,7 @@
 .map-placeholder {
     width: 100%;
     height: 100%;
-    background: #e9e9e9;
+    background: url(../assets/map.png);
     display: flex;
     align-items: center;
     justify-content: center;
